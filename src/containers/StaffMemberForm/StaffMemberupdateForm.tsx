@@ -49,8 +49,9 @@ const StaffMemberForm: React.FC<Props> = (props) => {
   const [email,setEmail]= React.useState('');
   const [setc, setsetc]= React.useState(true);
 
-  const {data,loading,error}=useQuery(GET_USER_ID,{
-    variables:{id}
+  const {data,loading}=useQuery(GET_USER_ID,{
+    variables:{id},
+    pollInterval:5000
   })
   const [createStaff] = useMutation(UPDATE_STAFF);
   if (loading) {
@@ -70,9 +71,9 @@ const StaffMemberForm: React.FC<Props> = (props) => {
   };
 
   const onSubmit = async valores => {
-    const {name,number,email,password} = valores
+    const {name,number,email} = valores
     try {
-      const data = await createStaff({
+       await createStaff({
         variables: {
           id:id,
           input: {

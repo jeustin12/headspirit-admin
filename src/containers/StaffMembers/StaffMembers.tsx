@@ -1,10 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import dayjs from 'dayjs';
 import { withStyle } from 'baseui';
 import { Grid, Row as Rows, Col as Column } from 'components/FlexBox/FlexBox';
 import { useDrawerDispatch } from 'context/DrawerContext';
-import Select from 'components/Select/Select';
-import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 
 import { Plus } from 'assets/icons/PlusMinus';
@@ -60,8 +57,6 @@ const Row = withStyle(Rows, () => ({
 export default function StaffMembers() {
   const dispatch = useDrawerDispatch();
 
-  const [search, setSearch] = useState('');
-  const [name, setname] = useState('');
   const [ID, setID] = useState('');
   const openDrawer = useCallback(
     () =>
@@ -88,7 +83,7 @@ export default function StaffMembers() {
     }
   }
 
-  const { data, error, refetch,loading } = useQuery(GET_STAFFS);
+  const { data, error,loading } = useQuery(GET_STAFFS);
   const [deletestaff]= useMutation(DELETE_USER)
   if (error) {
     return <div>Error! {error.message}</div>;
@@ -155,14 +150,14 @@ export default function StaffMembers() {
               <Row>
 
 
-                <Col md={5} xs={12}>
+                {/* <Col md={5} xs={12}>
                   <Input
                     value={search}
                     placeholder="Ex: Quick Search By Name"
                     // onChange={handleSearch}
                     clearable
                   />
-                </Col>
+                </Col> */}
 
                 <Col md={4} xs={12}>
                   <Button

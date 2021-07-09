@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { styled, withStyle } from 'baseui';
-import Button from 'components/Button/Button';
-import { Plus } from 'assets/icons/Plus';
 import { Grid, Row as Rows, Col as Column } from 'components/FlexBox/FlexBox';
 import Input from 'components/Input/Input';
 import Select from 'components/Select/Select';
@@ -96,12 +94,11 @@ const priceSelectOptions = [
 ];
 
 export default function Products() {
-  const { data, error,loading, refetch, fetchMore } = useQuery(GET_PRODUCTS,
+  const { data, error,loading, refetch, } = useQuery(GET_PRODUCTS,
     {
       pollInterval: 3000,
     }
     );
-  const [loadingMore, toggleLoading] = useState(false);
   const [type, setType] = useState([]);
   const [priceOrder, setPriceOrder] = useState([]);
   const [search, setSearch] = useState([]);

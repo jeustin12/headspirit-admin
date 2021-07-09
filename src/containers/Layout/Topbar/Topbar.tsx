@@ -9,7 +9,7 @@ import { NotificationIcon } from 'assets/icons/NotificationIcon';
 import { AlertDotIcon } from 'assets/icons/AlertDotIcon';
 import { ArrowLeftRound } from 'assets/icons/ArrowLeftRound';
 import { MenuIcon } from 'assets/icons/MenuIcon';
-import { useMutation, gql, useQuery } from '@apollo/client';
+import {  gql, useQuery } from '@apollo/client';
 import {
   TopbarWrapper,
   Logo,
@@ -32,13 +32,7 @@ import { useDrawerDispatch } from 'context/DrawerContext';
 import Drawer, { ANCHOR } from 'components/Drawer/Drawer';
 import Sidebar from '../Sidebar/Sidebar';
 
-const data = [
-  {
-    title: 'Delivery Successful',
-    time: '5m',
-    message: 'Order #34567 had been placed',
-  },
-];
+
 const GET_CATEGORIES = gql`
   query getAllCategories{
   getAllCategories{

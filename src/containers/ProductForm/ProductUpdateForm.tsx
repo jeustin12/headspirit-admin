@@ -67,7 +67,6 @@ const AddProduct: React.FC<Props> = () => {
   const[createProduct]=useMutation(CREATE_PRODUCT)
   const[createProductImage]=useMutation(UPDATE_PRODUCT_IMAGE)
   const[counter,SetCounter]= useState(1)
-  const [type, setType] = useState([{ value: data.type }]);
   const [tag, setTag] = useState([]);
   const [description, setDescription] = useState(data.description);
   React.useEffect(() => {
@@ -87,10 +86,6 @@ const AddProduct: React.FC<Props> = () => {
     setDescription(value);
   };
 
-  const handleTypeChange = ({ value }) => {
-    setValue('type', value);
-    setType(value);
-  };
   const handleUploader = (files) => {
     setValue('image', files[0]);
     SetCounter(2)

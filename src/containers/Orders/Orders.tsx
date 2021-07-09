@@ -3,11 +3,9 @@ import { styled, withStyle, createThemedUseStyletron } from 'baseui';
 import dayjs from 'dayjs';
 import { Grid, Row as Rows, Col as Column } from 'components/FlexBox/FlexBox';
 import Select from 'components/Select/Select';
-import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 import { useQuery, gql } from '@apollo/client';
 import { Wrapper, Header, Heading } from 'components/Wrapper.style';
-import Checkbox from 'components/CheckBox/CheckBox';
 
 import {
   TableWrapper,
@@ -81,15 +79,9 @@ const statusSelectOptions = [
     { value: 'delivered', label: '3 - Enviado' },
     { value: 'failed', label: '4 - Inconsistencias' },
 ];
-const limitSelectOptions = [
-  { value: 7, label: 'Last 7 orders' },
-  { value: 15, label: 'Last 15 orders' },
-  { value: 30, label: 'Last 30 orders' },
-];
+
 
 export default function Orders() {
-  const [checkedId, setCheckedId] = useState([]);
-  const [checked, setChecked] = useState(false);
   const [ID,setID]=useState('active')
   const [useCss, theme] = themedUseStyletron();
   const dispatch = useDrawerDispatch();
@@ -144,15 +136,14 @@ export default function Orders() {
   });
 
   const [status, setstatus] = useState('');
-  const [limit, setLimit] = useState([]);
-  const [search, setSearch] = useState([]);
-  const [Status, setStatus] = useState('');
 
   const { data, error, refetch } = useQuery(GET_ORDERS,
     
     {
       pollInterval: 3000,
-      variables:{Status}
+      variables:{
+        Status:
+        status}
     }
     );
   if (error) {

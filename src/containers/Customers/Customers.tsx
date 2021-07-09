@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
-import { styled, withStyle } from 'baseui';
+import {withStyle } from 'baseui';
 import { Grid, Row as Rows, Col as Column } from 'components/FlexBox/FlexBox';
 import Input from 'components/Input/Input';
 import Select from 'components/Select/Select';
@@ -48,22 +48,6 @@ const Row = withStyle(Rows, () => ({
   },
 }));
 
-const ImageWrapper = styled('div', ({ $theme }) => ({
-  width: '38px',
-  height: '38px',
-  overflow: 'hidden',
-  display: 'inline-block',
-  borderTopLeftRadius: '20px',
-  borderTopRightRadius: '20px',
-  borderBottomRightRadius: '20px',
-  borderBottomLeftRadius: '20px',
-  backgroundColor: $theme.colors.backgroundF7,
-}));
-
-const Image = styled('img', () => ({
-  width: '100%',
-  height: 'auto',
-}));
 
 const sortByOptions = [
   { value: 'highestToLowest', label: 'Highest To Lowest' },

@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
 import SettingsCard from 'components/SettingsCard/SettingsCard';
 import { useDrawerDispatch } from 'context/DrawerContext';
-import { STAFF_MEMBERS, SITE_SETTINGS } from 'settings/constants';
+import { STAFF_MEMBERS } from 'settings/constants';
 import { withStyle } from 'baseui';
 
-import { SiteSettings } from 'assets/icons/SiteSettings';
 import { Members } from 'assets/icons/Members';
 import { OrderIcon } from 'assets/icons/OrderIcon';
 import { CouponIcon } from 'assets/icons/CouponIcon';

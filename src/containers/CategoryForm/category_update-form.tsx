@@ -51,7 +51,6 @@ mutation updateCategory(
 `
 
 
-
 const AddCategory= (props) => {
   const dispatch = useDrawerDispatch();
   const id = useDrawerState('data')
@@ -65,6 +64,8 @@ const AddCategory= (props) => {
     const [name, setname] = useState('');
     const [Slug, setSlug] = useState('');
     const [Image, setImage] = useState('');
+    console.log(Image);
+    
     const [counter,SetCounter]= useState(1)
     const [setc, setsetc] = useState(true);
     const { register, handleSubmit,setValue} = useForm();

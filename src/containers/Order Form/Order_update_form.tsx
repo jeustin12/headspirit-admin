@@ -54,7 +54,6 @@ const options = [
     { value: 'failed', label: '4 - Problema' },
 ];
 
-type Props = any;
 
 const UpdateOrder = (props) => {
 const dispatch = useDrawerDispatch();
@@ -62,7 +61,7 @@ const id = useDrawerState('data')
 const closeDrawer = useCallback(() => dispatch({ type: 'CLOSE_DRAWER' }), [
     dispatch,
 ]);
-const {data,loading,error} = useQuery(GET_ORDER_ID
+const {data,loading} = useQuery(GET_ORDER_ID
 ,{
 variables:{id},
 });
@@ -105,8 +104,6 @@ const handleChange = ({ value }) => {
     // console.log(value[0].label)
 }
 let myNumber=data.FindOneOrder.contact.replace(/ /g,'')
-let Processingmessage = `Hola ${data.FindOneOrder.custumerName} ya recibimos el pago por los productos y los estaremos enviando el viernes`
-let Failedgmessage = `Hola ${data.FindOneOrder.custumerName} tuvimos el problema de `
 
 function getLinkWhastapp(number, message) {
     message = message.split(' ').join('%20')

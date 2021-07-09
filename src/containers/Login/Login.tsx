@@ -3,7 +3,7 @@ import { Redirect, useHistory, useLocation } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { AuthContext } from 'context/auth';
-import {gql,useMutation,useQuery} from '@apollo/client'
+import {gql,useQuery} from '@apollo/client'
 import {
   FormFields,
   FormLabel,
@@ -43,7 +43,7 @@ const MyInput = ({ field, form, ...props }) => {
 
 export default function Login() {
   const [loginerror,setLoginerror]=useState('')
-  const {data,loading,error,refetch}=useQuery(LOGIN,
+  const {data,refetch}=useQuery(LOGIN,
     {
       variables:{
         email:"...",
@@ -70,6 +70,7 @@ export default function Login() {
       console.log(error);
       setLoginerror('el usuario o la contraseña es incorrecta')
     }
+    
   };
 
   return (

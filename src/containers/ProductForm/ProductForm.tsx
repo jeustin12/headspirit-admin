@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
 import { useMutation, gql, useQuery } from '@apollo/client';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { useDrawerDispatch } from 'context/DrawerContext';
@@ -22,34 +21,6 @@ import {
 } from '../DrawerItems/DrawerItems.style';
 
 
-// const GET_PRODUCTS = gql`
-//   query getProducts(
-//     $type: String
-//     $sortByPrice: String
-//     $searchText: String
-//     $offset: Int
-//   ) {
-//     products(
-//       type: $type
-//       sortByPrice: $sortByPrice
-//       searchText: $searchText
-//       offset: $offset
-//     ) {
-//       items {
-//         id
-//         name
-//         image
-//         type
-//         price
-//         unit
-//         salePrice
-//         discountInPercent
-//       }
-//       totalCount
-//       hasMore
-//     }
-//   }
-// `;
 const CREATE_PRODUCT = gql`
 mutation createproduct($Input: CreateProductInput!,$file: Upload!){
   createProduct(Input:$Input,file:$file)
@@ -74,7 +45,6 @@ const AddProduct: React.FC<Props> = (props) => {
     dispatch,
   ]);
   const { register, handleSubmit, setValue } = useForm();
-  const [type, setType] = useState([]);
   const [category, setCategory] = useState();
   const [category2, setCategory2] = useState();
   const [description, setDescription] = useState('');
@@ -100,14 +70,7 @@ const AddProduct: React.FC<Props> = (props) => {
     setCategory2(value)
     setCategory(value[0].title);
   };
-  const handleMultiChange = ({ value }) => {
-    setValue('categories', value);
-    setCategory(value[0].title);
-  };
-  const handleTypeChange = ({ value }) => {
-    setValue('type', value);
-    setType(value);
-  };
+ 
   const handleUploader = (files) => {
     setValue('image', files[0]);
   };

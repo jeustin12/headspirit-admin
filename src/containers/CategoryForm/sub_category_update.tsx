@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { useMutation,gql, useQuery } from '@apollo/client';
 import { useDrawerDispatch, useDrawerState } from 'context/DrawerContext';
 import { Scrollbars } from 'react-custom-scrollbars';
-
 import Input from 'components/Input/Input';
 import Button, { KIND } from 'components/Button/Button';
 import DrawerBox from 'components/DrawerBox/DrawerBox';
@@ -33,7 +32,6 @@ mutation updateCategory($id: String!, $Input: SubcategoryInputUpdate!){
   updateSubcategory(id:$id,Input:$Input)
 }
 `
-
 
 const AddCategory= (props) => {
 const dispatch = useDrawerDispatch();

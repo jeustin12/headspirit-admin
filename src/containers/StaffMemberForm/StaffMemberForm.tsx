@@ -1,11 +1,9 @@
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
 import { useMutation, gql } from '@apollo/client';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { useDrawerDispatch } from 'context/DrawerContext';
 import Input from 'components/Input/Input';
-import Checkbox from 'components/CheckBox/CheckBox';
 import PhoneInput from 'components/PhoneInput/PhoneInput';
 import Button, { KIND } from 'components/Button/Button';
 
@@ -40,14 +38,13 @@ const StaffMemberForm: React.FC<Props> = (props) => {
   ]);
   const { register, handleSubmit } = useForm();
   const [country, setCountry] = React.useState(undefined);
-  const [checked, setChecked] = React.useState(true);
   const [text, setText] = React.useState('');
 
   const [createStaff] = useMutation(CREATE_STAFF);
   const onSubmit = async valores => {
     const {name,number,email,password} = valores
     try {
-      const data = await createStaff({
+     await createStaff({
         variables: {
           input: {
             name:name,
