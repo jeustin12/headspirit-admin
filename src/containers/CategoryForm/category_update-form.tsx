@@ -50,7 +50,7 @@ mutation updateCategory(
 }
 `
 
-type Props = any;
+
 
 const AddCategory= (props) => {
   const dispatch = useDrawerDispatch();
@@ -58,7 +58,7 @@ const AddCategory= (props) => {
   const closeDrawer = useCallback(() => dispatch({ type: 'CLOSE_DRAWER' }), [
     dispatch,
   ]);
-  const {data,loading,error} = useQuery(GET_CATEGORIES_ID
+  const {data,loading} = useQuery(GET_CATEGORIES_ID
     ,{
       variables:{id},
     });
