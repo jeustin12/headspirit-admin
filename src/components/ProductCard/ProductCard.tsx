@@ -16,7 +16,6 @@ import {
 } from './ProductCard.style';
 import { useDrawerDispatch } from 'context/DrawerContext';
 import Button from 'components/Button/Button';
-import { Plus } from 'assets/icons/Plus';
 import { useMutation,gql} from '@apollo/client';
 import Swal from 'sweetalert2';
 

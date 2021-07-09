@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Client as Styletron } from 'styletron-engine-atomic';
 import { Provider as StyletronProvider } from 'styletron-react';
 import { BaseProvider } from 'baseui';
-import { ApolloProvider, ApolloClient, InMemoryCache,createHttpLink } from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import { theme } from './theme';
 import Routes from './routes';
 import * as serviceWorker from './serviceWorker';
@@ -13,7 +13,6 @@ import { createUploadLink } from 'apollo-upload-client';
 
 
 const httpLink = createUploadLink({
-  // uri: 'http://localhost:4000/graphql',
   uri: 'http://localhost:5000/graphql',
 });
 

@@ -78,7 +78,7 @@ const AddCategory: React.FC<Props> = (props) => {
     const {name,image}= valores
     try {
       if (sub === true) {
-        const data = await CreateSubcategory({
+        await CreateSubcategory({
           variables: {
             Input: {
               title: name,
@@ -89,7 +89,7 @@ const AddCategory: React.FC<Props> = (props) => {
         }
         )
       } else {
-        const data = await CreateCategory({
+        await CreateCategory({
           variables: {
             input: {
               title: name,
