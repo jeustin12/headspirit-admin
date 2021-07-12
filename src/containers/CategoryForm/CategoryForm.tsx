@@ -80,7 +80,7 @@ const AddCategory: React.FC<Props> = (props) => {
     setsub(true)
   };
   const onSubmit = async valores => {
-    const {name,image}= valores
+    const {name}= valores
     try {
       if (sub === true) {
         await CreateSubcategory({
