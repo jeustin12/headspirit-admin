@@ -29,8 +29,13 @@ const GET_CATEGORIES = gql`
 }
 `;
 const CREATE_CATEGORY= gql`
-mutation createCategory($input: CategoryInput!,$file: Upload!){
-  createCategory(input:$input,file:$file)
+mutation createCategory($input: CategoryInput!,$file: String!){
+  createCategory(input:$input,file:$file){
+    id
+    icon
+    title
+    slug
+  }
 }
 `
 const CREATE_SUB_CATEGORY= gql`
@@ -96,7 +101,7 @@ const AddCategory: React.FC<Props> = (props) => {
               slug: name,
               type:"makeup"
             },
-            file: image
+            file: "https://picsum.photos/200/200"
           }
         }
         );
