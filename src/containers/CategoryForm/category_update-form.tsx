@@ -29,23 +29,30 @@ query  category($id: String!){
 }
 `;
 const UPDATE_CATEGORY_WHIT_IMAGE= gql`
-mutation updateCategoryImage(
-  $input: CategoryInputUpdate!,
-  $file: Upload, 
+mutation UPDATEIMAGE(
+  $input:CategoryInputUpdate!,
+  $file:Upload!, 
   $id:String!
 ){
-  updateCategory(id:$id
-  ,input:$input,
+  UPDATEIMAGE(
+  id:$id,
+  input:$input,
   file:$file
-  )
+  ){
+    id
+    icon
+    title
+    slug
+  }
 }
 `
 const UPDATE_CATEGORY= gql`
 mutation updateCategory(
   $input: CategoryInputUpdate!,
   $id:String!){
-  updateCategory(id:$id
-  ,input:$input,
+  updateCategory(
+    id:$id,
+    input:$input
   )
 }
 `
@@ -64,8 +71,7 @@ const AddCategory= (props) => {
     const [name, setname] = useState('');
     const [Slug, setSlug] = useState('');
     const [Image, setImage] = useState('');
-    console.log(Image);
-    
+      
     const [counter,SetCounter]= useState(1)
     const [setc, setsetc] = useState(true);
     const { register, handleSubmit,setValue} = useForm();
@@ -88,13 +94,15 @@ const AddCategory= (props) => {
     };
     const handleUploader = (files) => {
       setValue('image',files[0]);
+      console.log(Image);
       SetCounter(2)
     };
     const onSubmit = async valores => {
       const {Name,slug,image}= valores
+      
       if (counter === 2) {
         try {
-          await updateCategoryImage({
+           updateCategoryImage({
             variables:{
               id:id,
               input:{
@@ -102,17 +110,16 @@ const AddCategory= (props) => {
                 slug:slug
               },
               file:image,
-              isImage: "ok"
             }
           });
-          console.log(image)
           closeDrawer();
+          
         } catch (error) {
           console.log(error)
         }
       } else {
         try {
-          await updateCategory({
+           await updateCategory({
             variables:{
               id:id,
               input:{

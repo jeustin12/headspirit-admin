@@ -23,7 +23,9 @@ import {
 
 const CREATE_PRODUCT = gql`
 mutation createproduct($Input: CreateProductInput!,$file: Upload!){
-  createProduct(Input:$Input,file:$file)
+  createProduct(Input:$Input,file:$file){
+    id
+  }
 }
 `;
 
