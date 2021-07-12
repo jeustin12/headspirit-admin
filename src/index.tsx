@@ -14,6 +14,7 @@ import { createUploadLink } from 'apollo-upload-client';
 
 const httpLink = createUploadLink({
   uri: 'https://cryptic-inlet-95343.herokuapp.com/graphql',
+
 });
 
 const client = new ApolloClient({

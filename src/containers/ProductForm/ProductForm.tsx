@@ -35,6 +35,10 @@ const GET_CATEGORIES = gql`
     id
     title
   }
+  findallsubcategory{
+      id
+      title
+    }
 }
 `;
 
@@ -49,6 +53,8 @@ const AddProduct: React.FC<Props> = (props) => {
   const { register, handleSubmit, setValue } = useForm();
   const [category, setCategory] = useState();
   const [category2, setCategory2] = useState();
+  const [subcategory, setSubcategory] = useState();
+  const [subcategory2, setSubcategory2] = useState();
   const [description, setDescription] = useState('');
 
   React.useEffect(() => {
@@ -72,6 +78,11 @@ const AddProduct: React.FC<Props> = (props) => {
     setCategory2(value)
     setCategory(value[0].title);
   };
+  const handleSubChange = ({ value }) => {
+    setValue('parent', value);
+    setSubcategory2(value)
+    setSubcategory(value[0].title);
+  };
  
   const handleUploader = (files) => {
     setValue('image', files[0]);
@@ -90,7 +101,8 @@ const AddProduct: React.FC<Props> = (props) => {
       slug: data.name,
       description: data.description,
       isActive:"active",
-      category: category
+      category: category,
+      subcategory: subcategory
     };
     try {
       createProduct({
@@ -225,6 +237,64 @@ const AddProduct: React.FC<Props> = (props) => {
                     value={category2}
                     searchable={true}
                     onChange={handleChange}
+                    overrides={{
+                      Placeholder: {
+                        style: ({ $theme }) => {
+                          return {
+                            ...$theme.typography.fontBold14,
+                            color: $theme.colors.textNormal,
+                          };
+                        },
+                      },
+                      DropdownListItem: {
+                        style: ({ $theme }) => {
+                          return {
+                            ...$theme.typography.fontBold14,
+                            color: $theme.colors.textNormal,
+                          };
+                        },
+                      },
+                      OptionContent: {
+                        style: ({ $theme, $selected }) => {
+                          return {
+                            ...$theme.typography.fontBold14,
+                            color: $selected
+                              ? $theme.colors.textDark
+                              : $theme.colors.textNormal,
+                          };
+                        },
+                      },
+                      SingleValue: {
+                        style: ({ $theme }) => {
+                          return {
+                            ...$theme.typography.fontBold14,
+                            color: $theme.colors.textNormal,
+                          };
+                        },
+                      },
+                      Popover: {
+                        props: {
+                          overrides: {
+                            Body: {
+                              style: { zIndex: 5 },
+                            },
+                          },
+                        },
+                      },
+                    }}
+                  />
+                </FormFields>
+                <FormFields>
+                  <FormLabel>Sub Category</FormLabel>
+                  <Select
+                    options={data.findallsubcategory}
+                    getOptionValue
+                    labelKey="title"
+                    valueKey="id"
+                    placeholder="Choose subcategory"
+                    value={subcategory2}
+                    searchable={true}
+                    onChange={handleSubChange}
                     overrides={{
                       Placeholder: {
                         style: ({ $theme }) => {

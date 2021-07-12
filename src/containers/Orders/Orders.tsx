@@ -161,7 +161,6 @@ export default function Orders() {
     }
   }
 
-  console.log(data);
   
   
   // function handleSearch(event) {

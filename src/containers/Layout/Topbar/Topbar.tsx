@@ -39,6 +39,10 @@ const GET_CATEGORIES = gql`
     id
     title
   }
+  findallsubcategory{
+      id
+      title
+    }
 }
 `;
 const Topbar = ({ refs }: any) => {
