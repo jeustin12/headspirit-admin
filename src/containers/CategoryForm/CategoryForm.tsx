@@ -29,7 +29,7 @@ const GET_CATEGORIES = gql`
 }
 `;
 const CREATE_CATEGORY= gql`
-mutation createCategory($input: CategoryInput!,$file: String!){
+mutation createCategory($input: CategoryInput!,$file: Upload!){
   createCategory(input:$input,file:$file){
     id
     icon
