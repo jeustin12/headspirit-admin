@@ -80,7 +80,7 @@ const AddCategory: React.FC<Props> = (props) => {
     setsub(true)
   };
   const onSubmit = async valores => {
-    const {name}= valores
+    const {name,image}= valores
     try {
       if (sub === true) {
         await CreateSubcategory({
@@ -101,7 +101,7 @@ const AddCategory: React.FC<Props> = (props) => {
               slug: name,
               type:"makeup"
             },
-            file: "https://picsum.photos/200/200"
+            file: image
           }
         }
         );
