@@ -317,7 +317,7 @@ return (
                 }}
             />
             </FormFields>
-            {(status === '2-Pago realizado') ?
+            {(status === '2 - Pago realizado') ?
             <FormFields>
             <FormLabel>Mensaje</FormLabel>
             <Input
@@ -329,7 +329,7 @@ return (
             </FormFields>
             : ''
             }
-            {(status === '4-Problema') ?
+            {(status === '4 - Problema') ?
             <FormFields>
             <FormLabel>Mensaje del problema</FormLabel>
             <Input
@@ -341,7 +341,7 @@ return (
             </FormFields>
             : ''
             }
-            {(status === '3-Enviado') ?
+            {(status === '3 - Enviado') ?
             <div>
             
             <FormFields>
