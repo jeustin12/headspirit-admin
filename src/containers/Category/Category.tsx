@@ -68,7 +68,6 @@ const Row = withStyle(Rows, () => ({
 export default function Category() {
 
 const [search, setSearch] = useState('');
-const [ID, setID] = useState('active');
 
 const { data, error, refetch ,loading} = useQuery(GET_CATEGORIES
     ,{
@@ -81,36 +80,18 @@ const openDrawer = useCallback(
 [dispatch]);
 
 const passid =(id)=>{
-  setID(id)
-  setTimeout(() => {
-    if (ID === 'active') {
-      console.log('')
-    }
-    else if (ID.length===36) {
-      setTimeout(()=>{
-        openDrawerUpdate()
-        // console.log(ID)
-      },1000);
+    if (id.length===36) {
+      dispatch({ type: 'OPEN_DRAWER',
+      drawerComponent: 'CATEGORY_UPDATE_FORM',
+      data:id})
     } else{
-      setTimeout(()=>{
-        openDrawerSubUpdate()
-        // console.log(ID)
-      },1000);
-    }
-  }, 1000);
+      dispatch({ type: 'OPEN_DRAWER',
+      drawerComponent: 'SUBCATEGORY_UPDATE_FORM',
+    data:id}) 
 }
-const openDrawerUpdate = useCallback(
-  () => dispatch({ type: 'OPEN_DRAWER',
-  drawerComponent: 'CATEGORY_UPDATE_FORM',
-  data:ID}),
-  [dispatch,ID]
-);
-const openDrawerSubUpdate = useCallback(
-  () => dispatch({ type: 'OPEN_DRAWER',
-  drawerComponent: 'SUBCATEGORY_UPDATE_FORM',
-  data:ID}),
-  [dispatch,ID]
-);
+
+}
+
 const [deleteCategory]= useMutation(DELETE_CATEGORY)
 const [deleteSubategory]= useMutation(DELETE_SUB_CATEGORY)
 

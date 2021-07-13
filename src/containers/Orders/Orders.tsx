@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { styled, withStyle, createThemedUseStyletron } from 'baseui';
 import dayjs from 'dayjs';
 import { Grid, Row as Rows, Col as Column } from 'components/FlexBox/FlexBox';
@@ -83,34 +83,15 @@ const statusSelectOptions = [
 
 
 export default function Orders() {
-  const [ID,setID]=useState('active')
   const [useCss, theme] = themedUseStyletron();
   const dispatch = useDrawerDispatch();
   
   const passid =(id)=>{
-    setID(id)
-    setTimeout(() => {
-      if (ID === 'active') {
-        console.log('')
-      }
-      else if (ID.length >= 1) {
-        setTimeout(()=>{
-          openDrawer()
-          console.log(ID)
-        },1000);
-      } else{
-        setTimeout(()=>{
-          console.log(ID)
-        },1000);
-      }
-    }, 1000);
+    dispatch({ 
+      type: 'OPEN_DRAWER', 
+      drawerComponent: 'ORDER_UPDATE_FORM',
+      data:id})
   }
-  const openDrawer = useCallback(
-  () => dispatch({ 
-  type: 'OPEN_DRAWER', 
-  drawerComponent: 'ORDER_UPDATE_FORM',
-  data:ID}),
-  [dispatch,ID]);
   const sent = useCss({
     ':before': {
       content: '""',

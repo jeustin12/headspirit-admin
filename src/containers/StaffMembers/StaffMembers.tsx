@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { withStyle } from 'baseui';
 import { Grid, Row as Rows, Col as Column } from 'components/FlexBox/FlexBox';
 import { useDrawerDispatch } from 'context/DrawerContext';
@@ -57,31 +57,18 @@ const Row = withStyle(Rows, () => ({
 export default function StaffMembers() {
   const dispatch = useDrawerDispatch();
 
-  const [ID, setID] = useState('');
   const openDrawer = useCallback(
     () =>
       dispatch({ type: 'OPEN_DRAWER', drawerComponent: 'STAFF_MEMBER_FORM' }),
     [dispatch]
   );
-  const openDrawerUpdate = useCallback(
-    () =>
-      dispatch({ type: 'OPEN_DRAWER',
-      drawerComponent: 'UPDATE_STAFF_MEMBER_FORM',
-      data: ID}),
-    [dispatch,ID]
-  );
+ 
   
   const passid =(id)=>{
-    setID(id)
-    if (ID === '') {
-      console.log(1)
+    dispatch({ type: 'OPEN_DRAWER',
+      drawerComponent: 'UPDATE_STAFF_MEMBER_FORM',
+      data: id})
     }
-    else{
-      setTimeout(() => {
-        openDrawerUpdate();
-      }, 1000);
-    }
-  }
 
   const { data, error,loading } = useQuery(GET_STAFFS);
   const [deletestaff]= useMutation(DELETE_USER)

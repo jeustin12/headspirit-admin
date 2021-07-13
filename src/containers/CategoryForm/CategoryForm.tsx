@@ -94,19 +94,19 @@ const AddCategory: React.FC<Props> = (props) => {
         }
         )
       } else {
-        await CreateCategory({
+        const datac =await CreateCategory({
           variables: {
             input: {
               title: name,
               slug: name,
-              type:"makeup"
+              type:"tienda"
             },
             file: image
           }
         }
         );
+        console.log(datac)
       }
-      console.log(data)
       closeDrawer();
     } catch (error) {
       console.log(error)
