@@ -116,38 +116,38 @@ const onSubmit = async valores => {
     console.log(valores);
     let ship_message = message + guide_number
     if (guide_number === "" ) {
-        if (valores.parent === undefined) {
-            try {
-            await updateOrder({
-                variables:{
-                id:id,
-                input:{
-                    Status:stat
-                },
-                }
-            });
-            switch (stat) {
-                case '2 - Pago realizado':
-                    getLinkWhastapp(myNumber,message)
-                    break;
-                case '4 - Problema':
-                    getLinkWhastapp(myNumber,message)
-                    break;
-                case '3 - Enviado':
-                        getLinkWhastapp(myNumber,ship_message);
-                        updateCustumer({
-                            variables:{
-                                id: data.FindOneOrder.custumerId,
-                                order: Number(data.FindOneOrder.Total_amount)
-                            }
-                        })
-                    break;
-            }
-            closeDrawer();
-            } catch (error) {
-            console.log(error)
-            }
-        } else {
+        // if (valores.parent === undefined) {
+        //     try {
+        //     await updateOrder({
+        //         variables:{
+        //         id:id,
+        //         input:{
+        //             Status:stat
+        //         },
+        //         }
+        //     });
+        //     switch (stat) {
+        //         case '2 - Pago realizado':
+        //             getLinkWhastapp(myNumber,message)
+        //             break;
+        //         case '4 - Problema':
+        //             getLinkWhastapp(myNumber,message)
+        //             break;
+        //         case '3 - Enviado':
+        //                 getLinkWhastapp(myNumber,ship_message);
+        //                 updateCustumer({
+        //                     variables:{
+        //                         id: data.FindOneOrder.custumerId,
+        //                         order: Number(data.FindOneOrder.Total_amount)
+        //                     }
+        //                 })
+        //             break;
+        //     }
+        //     closeDrawer();
+        //     } catch (error) {
+        //     console.log(error)
+        //     }
+        // } else {
             try {
                 await updateOrder({
                     variables:{
@@ -179,7 +179,7 @@ const onSubmit = async valores => {
                 } catch (error) {
                 console.log(error)
                 }
-        }
+        // }
     } else {
             try {
                 await updateOrder({
@@ -202,7 +202,7 @@ const onSubmit = async valores => {
                         })
                         break;
                 }
-                // console.log('aqui')
+                
                 closeDrawer();
                 } catch (error) {
                 console.log(error)
@@ -215,6 +215,7 @@ const set = () => {
 setTimeout(()=>{
     setsetc(false)
     SetStat(data.FindOneOrder.Status)
+    setStatus(data.FindOneOrder.Status)
 },100)
 };
 if (setc === true) set()

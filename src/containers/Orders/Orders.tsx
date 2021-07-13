@@ -137,6 +137,7 @@ export default function Orders() {
   });
 
   const [status, setstatus] = useState('');
+  const [statust, setstatust] = useState('');
 
   const { data, error, refetch } = useQuery(GET_ORDERS,
     
@@ -152,7 +153,10 @@ export default function Orders() {
   }
 
   function handleStatus({ value }) {
-    setstatus(value);
+    if(value === []){
+      setstatus('');
+    }
+    setstatust(value)
     if (value.length) {
       refetch({
         Status: value[0].label,
@@ -162,7 +166,6 @@ export default function Orders() {
     }
   }
 
-  console.log(data);
   
   
   // function handleSearch(event) {
@@ -193,7 +196,7 @@ export default function Orders() {
                     labelKey="label"
                     valueKey="value"
                     placeholder="Status"
-                    value={status}
+                    value={statust}
                     searchable={false}
                     onChange={handleStatus}
                   />
