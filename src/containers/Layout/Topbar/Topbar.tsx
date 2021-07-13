@@ -54,6 +54,7 @@ const Topbar = ({ refs }: any) => {
     () => dispatch({ type: 'OPEN_DRAWER', drawerComponent: 'PRODUCT_FORM' }),
     [dispatch]
   );
+// console.log(localStorage.getItem('id'));
 
   return (
     <TopbarWrapper ref={refs}>

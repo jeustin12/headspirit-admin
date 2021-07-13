@@ -70,9 +70,9 @@ export default function Category() {
 const [search, setSearch] = useState('');
 
 const { data, error, refetch ,loading} = useQuery(GET_CATEGORIES
-    ,{
-      pollInterval: 3000,
-    }
+    // ,{
+    //   pollInterval: 3000,
+    // }
     );
 const dispatch = useDrawerDispatch();
 const openDrawer = useCallback(

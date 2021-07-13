@@ -66,6 +66,7 @@ export default function Login() {
         authenticate({ username, password }, () => {
           history.replace(from);
         });
+        localStorage.setItem('id',username)
     } catch (error) {
       console.log(error);
       setLoginerror('el usuario o la contraseña es incorrecta')

@@ -11,6 +11,7 @@ const getInputFontStyle = ({ $theme }) => {
 const Input = ({ ...props }) => {
   return (
     <BaseInput
+    autoComplete='off'
       overrides={{
         Input: {
           style: ({ $theme }) => {
