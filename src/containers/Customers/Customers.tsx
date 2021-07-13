@@ -55,14 +55,14 @@ const sortByOptions = [
 ];
 
 export default function Customers() {
-  const { data, error, refetch } = useQuery(GET_CUSTOMERS);
+  const { data, error,loading, refetch } = useQuery(GET_CUSTOMERS);
   const [stock, setStock] = useState([]);
   const [search, setSearch] = useState([]);
 
-  if (error) {
-    return <div>Error! {error.message}</div>;
+  if (loading) {
+    return <div>Cargando...</div>
   }
-
+  
   function handleSort({ value }) {
     setStock(value);
     if (value.length) {
@@ -78,11 +78,15 @@ export default function Customers() {
   function handleSearch(event) {
     const value = event.currentTarget.value;
     console.log(value, 'cus val');
-
+    
     setSearch(value);
     refetch({ searchBy: value });
   }
-  console.log(data);
+  let customer = data.customers.filter(ele=>ele.name!== 'prueba')
+  
+  if (error) {
+    return <div>Error! {error.message}</div>;
+  }
 
   return (
     <Grid fluid={true}>
@@ -126,7 +130,7 @@ export default function Customers() {
 
           <Wrapper style={{ boxShadow: '0 0 5px rgba(0, 0 , 0, 0.05)' }}>
             <TableWrapper>
-              <StyledTable $gridTemplateColumns="minmax(200px, auto) minmax(200px, auto) minmax(150px, auto) minmax(150px, max-content) minmax(150px, auto) minmax(150px, auto)">
+              <StyledTable $gridTemplateColumns="minmax(200px, 200px) minmax(200px, 200px) minmax(200px, 200px) minmax(150px, max-content) minmax(150px, 200px) minmax(200px, 200px)">
                 <StyledHeadCell>ID</StyledHeadCell>
                 <StyledHeadCell>Nombre</StyledHeadCell>
                 <StyledHeadCell>Numero de telefono</StyledHeadCell>
@@ -135,8 +139,8 @@ export default function Customers() {
                 <StyledHeadCell>Fecha en la que se unio</StyledHeadCell>
 
                 {data ? (
-                  data.customers.length ? (
-                    data.customers
+                  customer.length ? (
+                    customer
                       .map((item) => Object.values(item))
                       .map((row, index) => (
                         <React.Fragment key={index}>
