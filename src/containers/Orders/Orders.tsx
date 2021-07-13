@@ -22,7 +22,6 @@ const GET_ORDERS = gql`
       id
       custumerName
       creation_date
-      products
       delivery_address
       Total_amount
       contact
@@ -213,10 +212,9 @@ export default function Orders() {
 
           <Wrapper style={{ boxShadow: '0 0 5px rgba(0, 0 , 0, 0.05)' }}>
             <TableWrapper>
-              <StyledTable $gridTemplateColumns=" minmax(170px, 100px) minmax(150px, auto)  minmax(150px, auto) minmax(170px, auto) minmax(70px, max-content) minmax(170px, auto) minmax(150px, auto) minmax(150px, auto) minmax(150px, auto) minmax(150px, auto)  ">
+              <StyledTable $gridTemplateColumns=" minmax(170px, 100px) minmax(150px, auto) minmax(170px, auto) minmax(70px, max-content) minmax(170px, auto) minmax(150px, auto) minmax(150px, auto) minmax(150px, auto) minmax(150px, auto)  ">
                 <StyledHeadCell>Nombre del cliente</StyledHeadCell>
                 <StyledHeadCell>Fecha del Pedido</StyledHeadCell>
-                <StyledHeadCell>Productos pedidos</StyledHeadCell>
                 <StyledHeadCell>Direccion de envio</StyledHeadCell>
                 <StyledHeadCell>Pagar</StyledHeadCell>
                 <StyledHeadCell>Numero de telefono</StyledHeadCell>
@@ -235,28 +233,27 @@ export default function Orders() {
                             {dayjs(row[3]).format('DD MMM YYYY')}
                           </StyledCell>
                           <StyledCell>{row[4]}</StyledCell>
-                          <StyledCell>{row[5]}</StyledCell>
-                          <StyledCell>₡{row[6]}</StyledCell>
+                          <StyledCell>₡{row[5]}</StyledCell>
+                          <StyledCell>{row[6]}</StyledCell>
                           <StyledCell>{row[7]}</StyledCell>
-                          <StyledCell>{row[8]}</StyledCell>
                           <StyledCell style={{ justifyContent: 'center' }}>
                             <Statuss
                               className={
-                                row[9] === '3 - Enviado'
+                                row[8] === '3 - Enviado'
                                 ? sent
-                                : row[9] === '1 - Pago pendiente'
+                                : row[8] === '1 - Pago pendiente'
                                 ? paid
-                                : row[9] === '2 - Pago realizado'
+                                : row[8] === '2 - Pago realizado'
                                 ? processing
-                                : row[9].toLowerCase() === '4 - Inconsistencias'
+                                : row[8].toLowerCase() === '4 - Inconsistencias'
                                 ? failed
                                 : ''
                               }
                               >
-                              {row[9]}
+                              {row[8]}
                             </Statuss>
                           </StyledCell>
-                        <StyledCell>{row[10]}</StyledCell>
+                        <StyledCell>{row[9]}</StyledCell>
                           <StyledCell>
                           <Button
                         onClick={()=>{passid(row[1])}}
