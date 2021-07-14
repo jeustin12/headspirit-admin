@@ -33,6 +33,7 @@ Total_amount
 contact
 Status
 guide_number
+Products
 }
 }
 `;
@@ -214,6 +215,7 @@ return (
         Cliente: {data.FindOneOrder.custumerName}<br/>
         Teléfono: {data.FindOneOrder.contact}<br/>
         Ordenado el: {dayjs(data.FindOneOrder.creation_date).format('DD MMM YYYY')}<br/>
+        Productos Ordenados: {data.FindOneOrder.Products}
     </FieldDetails>
     </Col>
 
