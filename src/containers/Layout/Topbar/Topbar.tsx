@@ -16,7 +16,7 @@ import {
   LogoImage,
   TopbarRightSide,
   ProfileImg,
-  Image,
+  // Image,
   AlertDot,
   NotificationIconWrapper,
   UserDropdowItem,
@@ -44,35 +44,32 @@ const GET_CATEGORIES = gql`
     }
 }
 `;
-const GET_USER_ID =gql`
-query findOneImage($user: String!){
-  findOneImage(user:$user){
-    name
-    number
-    email
-    image
-  }
-}
-`
+// const GET_USER_ID =gql`
+// query findOneImage($user: String!){
+//   findOneImage(user:$user){
+//     name
+//     number
+//     email
+//     image
+//   }
+// }
+// `
 
 const Topbar = ({ refs }: any) => {
   const {data} = useQuery(GET_CATEGORIES);
-  let id = localStorage.getItem('id');
-  const userImage = useQuery(GET_USER_ID,{
-    variables:{
-      user: id
-    }
-  }) 
+  // let id = localStorage.getItem('id');
+  // const userImage = useQuery(GET_USER_ID,{
+  //   variables:{
+  //     user: id
+  //   }
+  // }) 
   const dispatch = useDrawerDispatch();
   const { signout } = React.useContext(AuthContext);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [setc, setsetc] = useState(true);
-  const [image,setImage] = useState('')
   const openDrawer = useCallback(
     () => dispatch({ type: 'OPEN_DRAWER', drawerComponent: 'PRODUCT_FORM' }),
     [dispatch]
   );
-
   return (
     <TopbarWrapper ref={refs}>
       <Logo>
@@ -190,11 +187,11 @@ const Topbar = ({ refs }: any) => {
           }}
         >
           <ProfileImg>
-           {(image === '' ? 
+           {/* {(image === '' ? 
             ''
             :
             <Image src={image} alt="user" />
-            )} 
+            )}  */}
           </ProfileImg>
         </Popover>
       </TopbarRightSide>
