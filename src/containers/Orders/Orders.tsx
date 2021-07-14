@@ -215,18 +215,33 @@ export default function Orders() {
                       .map((item) => Object.values(item))
                       .map((row, index) => (
                         <React.Fragment key={index}>
-                          <StyledCell>{row[2]}</StyledCell>
-                          <StyledCell>
+                          <StyledCell
+                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          >{row[2]}</StyledCell>
+                          <StyledCell
+                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          >
                             {dayjs(row[3]).format('DD MMM YYYY')}
                           </StyledCell>
-                          <StyledCell>{row[4]}</StyledCell>
-                          <StyledCell>{row[5]}</StyledCell>
-                          <StyledCell>₡{row[6]}</StyledCell>
-                          <StyledCell>{row[7]}</StyledCell>
-                          <StyledCell>{row[8]}</StyledCell>
+                          <StyledCell
+                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          >{row[4]}</StyledCell>
+                          <StyledCell
+                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          >{row[5]}</StyledCell>
+                          <StyledCell
+                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          >₡{row[6]}</StyledCell>
+                          <StyledCell
+                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          >{row[7]}</StyledCell>
+                          <StyledCell
+                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          >{row[8]}</StyledCell>
                           <StyledCell style={{ justifyContent: 'center' }}>
                             <Statuss
                               className={
+                                
                                 row[9] === '3 - Enviado'
                                 ? sent
                                 : row[9] === '1 - Pago pendiente'
