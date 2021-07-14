@@ -33,20 +33,20 @@ import Drawer, { ANCHOR } from 'components/Drawer/Drawer';
 import Sidebar from '../Sidebar/Sidebar';
 
 
-// const GET_CATEGORIES = gql`
-//   query getAllCategories{
-//   getAllCategories{
-//     id
-//     title
-//   }
-//   findallsubcategory{
-//       id
-//       title
-//     }
-// }
-// `;
+const GET_CATEGORIES = gql`
+  query getAllCategories{
+  getAllCategories{
+    id
+    title
+  }
+  findallsubcategory{
+      id
+      title
+    }
+}
+`;
 const Topbar = ({ refs }: any) => {
-  // const {data} = useQuery(GET_CATEGORIES);
+  const {data} = useQuery(GET_CATEGORIES);
   const dispatch = useDrawerDispatch();
   const { signout } = React.useContext(AuthContext);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -54,7 +54,7 @@ const Topbar = ({ refs }: any) => {
     () => dispatch({ type: 'OPEN_DRAWER', drawerComponent: 'PRODUCT_FORM' }),
     [dispatch]
   );
-// console.log(localStorage.getItem('id'));
+console.log(localStorage.getItem('id'));
 
   return (
     <TopbarWrapper ref={refs}>
@@ -111,7 +111,7 @@ const Topbar = ({ refs }: any) => {
       <TopbarRightSide>
         <Button onClick={openDrawer}>Add Products</Button>
 
-        {/* <Popover
+        <Popover
           content={({ close }) => <Notification data={data} onClear={close} />}
           accessibilityType={'tooltip'}
           placement={PLACEMENT.bottomRight}
@@ -135,7 +135,7 @@ const Topbar = ({ refs }: any) => {
               <AlertDotIcon />
             </AlertDot>
           </NotificationIconWrapper>
-        </Popover> */}
+        </Popover>
 
         <Popover
           content={({ close }) => (

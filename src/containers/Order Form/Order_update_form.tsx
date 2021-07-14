@@ -141,7 +141,7 @@ const onSubmit = async valores => {
                 },
             }
         });
-        getLinkWhastapp(myNumber,message)
+        getLinkWhastapp(myNumber,ship_message)
     }else if(valores.parent[0].label === '3 - Enviado' && message.length > 0 && guide_number > 0){
         await updateOrder({
             variables:{
@@ -187,7 +187,7 @@ if (setc === true) set()
 return (
 <>
 <DrawerTitleWrapper>
-    <DrawerTitle>Edit</DrawerTitle>
+    <DrawerTitle>Editar Orden</DrawerTitle>
 </DrawerTitleWrapper>
 
 <Form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%' }}>

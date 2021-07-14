@@ -99,9 +99,8 @@ const AddProduct: React.FC<Props> = () => {
       unit: data2.unit,
       price: Number(data2.price),
       discountInPercent: Number(data2.discountInPercent),
-      quantity: Number(data2.quantity),
-      salePrice: Number(data2.salePrice),
-      // creation_date: new Date(),
+      quantity: Number(data2.quantity).toFixed(2),
+      salePrice: Number(data2.salePrice).toFixed(2),
       slug: data2.name,
       description: data2.description,
       isActive:"active"
