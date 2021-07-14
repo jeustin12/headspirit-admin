@@ -198,7 +198,7 @@ export default function Orders() {
 
           <Wrapper style={{ boxShadow: '0 0 5px rgba(0, 0 , 0, 0.05)' }}>
             <TableWrapper>
-              <StyledTable $gridTemplateColumns=" minmax(170px, 100px) minmax(150px, auto) minmax(170px, auto) minmax(170px, auto) minmax(70px, max-content) minmax(170px, auto) minmax(150px, auto) minmax(150px, auto) minmax(150px, auto) minmax(150px, auto)  ">
+              <StyledTable $gridTemplateColumns=" minmax(170px, 100px) minmax(150px, auto) minmax(300px, 200px) minmax(300px, auto) minmax(100px, max-content) minmax(170px, auto) minmax(150px, auto) minmax(175px, auto) minmax(150px, auto) minmax(150px, auto)  ">
                 <StyledHeadCell>Nombre del cliente</StyledHeadCell>
                 <StyledHeadCell>Fecha del Pedido</StyledHeadCell>
                 <StyledHeadCell>Direccion de envio</StyledHeadCell>
@@ -216,30 +216,34 @@ export default function Orders() {
                       .map((row, index) => (
                         <React.Fragment key={index}>
                           <StyledCell
-                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          style={ index % 2? { background : "grey" }:{ background : "white" }}
                           >{row[2]}</StyledCell>
                           <StyledCell
-                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          style={ index % 2? { background : "grey" }:{ background : "white" }}
                           >
                             {dayjs(row[3]).format('DD MMM YYYY')}
                           </StyledCell>
                           <StyledCell
-                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          style={ index % 2? { background : "grey" }:{ background : "white" }}
                           >{row[4]}</StyledCell>
                           <StyledCell
-                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          style={ index % 2? { background : "grey" }:{ background : "white" }}
                           >{row[5]}</StyledCell>
                           <StyledCell
-                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          style={ index % 2? { background : "grey" }:{ background : "white" }}
                           >₡{row[6]}</StyledCell>
                           <StyledCell
-                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          style={ index % 2? { background : "grey" }:{ background : "white" }}
                           >{row[7]}</StyledCell>
                           <StyledCell
-                          style={ index % 2? { background : "#fdffe0" }:{ background : "white" }}
+                          style={ index % 2? { background : "grey" }:{ background : "white" }}
                           >{row[8]}</StyledCell>
-                          <StyledCell style={{ justifyContent: 'center' }}>
+                          <StyledCell 
+                           style={ index % 2? { background : "grey" }:{ background : "white" }}
+                          >
+                          
                             <Statuss
+                            
                               className={
                                 
                                 row[9] === '3 - Enviado'
@@ -256,7 +260,9 @@ export default function Orders() {
                               {row[9]}
                             </Statuss>
                           </StyledCell>
-                        <StyledCell>{row[10]}</StyledCell>
+                        <StyledCell
+                         style={ index % 2? { background : "grey" }:{ background : "white" }}
+                        >{row[10]}</StyledCell>
                           <StyledCell>
                           <Button
                         onClick={()=>{passid(row[1])}}
