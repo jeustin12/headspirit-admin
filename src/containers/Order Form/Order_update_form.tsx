@@ -43,11 +43,7 @@ mutation UpdateOrder($input: OrderInputUpdate!, $id: String!) {
 UpdateOrder(input: $input, id: $id)
 }
 `
-const CUSTUMER_ORDERS = gql`
-mutation custumerOrders($id: String!, $order: Float!) {
-UpdateOrderAndOrders(id: $id, order: $order)
-}
-`;
+
 
 const options = [
     { value: 'pending', label: '1 - Pendiente de Pago' },
@@ -85,8 +81,6 @@ register({ name: 'image' });
 }, [register]);
 
 const[updateOrder]= useMutation(UPDATE_ORDER)
-const[updateCustumer]= useMutation(CUSTUMER_ORDERS)
-
 
 if(loading) return <h1>Cargando...</h1>
 const handleSlugChange = ({ value }) => {

@@ -27,7 +27,6 @@ import {
   DrawerWrapper,
 } from './Topbar.style';
 import Logoimage from 'assets/image/PickBazar.png';
-import UserImage from 'assets/image/user.jpg';
 import { useDrawerDispatch } from 'context/DrawerContext';
 import Drawer, { ANCHOR } from 'components/Drawer/Drawer';
 import Sidebar from '../Sidebar/Sidebar';
@@ -45,8 +44,25 @@ const GET_CATEGORIES = gql`
     }
 }
 `;
+const GET_USER_ID =gql`
+query findOneImage($user: String!){
+  findOneImage(user:$user){
+    name
+    number
+    email
+    image
+  }
+}
+`
+
 const Topbar = ({ refs }: any) => {
   const {data} = useQuery(GET_CATEGORIES);
+  let id = localStorage.getItem('id');
+  const userImage = useQuery(GET_USER_ID,{
+    variables:{
+      user: id
+    }
+  }) 
   const dispatch = useDrawerDispatch();
   const { signout } = React.useContext(AuthContext);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -54,8 +70,26 @@ const Topbar = ({ refs }: any) => {
     () => dispatch({ type: 'OPEN_DRAWER', drawerComponent: 'PRODUCT_FORM' }),
     [dispatch]
   );
-console.log(localStorage.getItem('id'));
-
+  if (userImage.loading) {
+    return(
+      <div
+    style={{
+      width: "50px",
+      height: "50px",
+      /* Center vertically and horizontally */
+      position: "absolute",
+      top: "50%",
+      left: "25%",
+      margin: "-25px 0 0 -25px"
+    }}>
+      <h1
+      style={{
+        color:"#CBC0D3"
+      }}
+      >Cargando</h1>
+    </div>
+    )
+  }
   return (
     <TopbarWrapper ref={refs}>
       <Logo>
@@ -173,7 +207,11 @@ console.log(localStorage.getItem('id'));
           }}
         >
           <ProfileImg>
-            <Image src={UserImage} alt="user" />
+            {(userImage.data.findOneImage.image===null ? 
+            ''
+            :
+            <Image src={userImage.data.findOneImage.image} alt="user" />
+            )}
           </ProfileImg>
         </Popover>
       </TopbarRightSide>

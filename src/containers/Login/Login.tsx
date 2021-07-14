@@ -21,6 +21,7 @@ query login ($password: String!, $email: String!){
   Login(email:$email,password:$password){
     name
     email
+    id
   }
 }
 `
@@ -67,6 +68,7 @@ export default function Login() {
           history.replace(from);
         });
         localStorage.setItem('id',username)
+        
     } catch (error) {
       console.log(error);
       setLoginerror('el usuario o la contraseña es incorrecta')
@@ -116,7 +118,7 @@ export default function Login() {
                   <Error>{errors.password}</Error>
                 )}
               </FormFields>
-              <h3>{(data === undefined)? '': `i`}</h3>
+              <h3>{(data === undefined)? '': ``}</h3>
               <Button
                 type="submit"
                 disabled={isSubmitting}

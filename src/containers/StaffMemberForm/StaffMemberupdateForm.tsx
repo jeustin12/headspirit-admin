@@ -51,7 +51,6 @@ const StaffMemberForm: React.FC<Props> = (props) => {
 
   const {data,loading}=useQuery(GET_USER_ID,{
     variables:{id},
-    pollInterval:5000
   })
   const [createStaff] = useMutation(UPDATE_STAFF);
   if (loading) {

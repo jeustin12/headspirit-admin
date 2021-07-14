@@ -17,10 +17,22 @@ import {
   ButtonGroup,
 } from '../DrawerItems/DrawerItems.style';
 import { FormFields, FormLabel } from 'components/FormFields/FormFields';
+import Uploader from 'components/Uploader/Uploader';
 
 const CREATE_STAFF = gql`
 mutation createStaff($input: UserInput!) {
     Register(input:$input) {
+      id
+      name
+      email
+      number
+    }
+  }
+`;
+
+const CREATE_STAFF_IMAGE = gql`
+mutation createStaff($input: UserInput!,$file:Upload!) {
+  RegisterwihtImage(input:$input,file:$file) {
       id
       name
       email
@@ -38,34 +50,60 @@ const StaffMemberForm: React.FC<Props> = (props) => {
   ]);
   const { register, handleSubmit } = useForm();
   const [country, setCountry] = React.useState(undefined);
+  const [image,setImage]= React.useState('no')
   const [text, setText] = React.useState('');
-
   const [createStaff] = useMutation(CREATE_STAFF);
+  const [createStaffImage] = useMutation(CREATE_STAFF_IMAGE);
+
+  const handleUploader = (files) => {
+    setImage(files[0]);
+    console.log(files)
+  };
   const onSubmit = async valores => {
-    const {name,number,email,password} = valores
-    try {
-     await createStaff({
-        variables: {
-          input: {
-            name:name,
-            number:number,
-            email:email,
-            password:password
+    const {name,number,email,password} = valores 
+    if (image === 'no') {
+      try {
+       await createStaff({
+          variables: {
+            input: {
+              name:name,
+              number:number,
+              email:email,
+              password:password
+            }
           }
         }
+        );
+        closeDrawer();
+      } catch (error) {
+        console.log(error)
       }
-      );
-      closeDrawer();
-    } catch (error) {
-      console.log(error)
     }
+    try {
+      await createStaffImage({
+         variables: {
+           input: {
+             name:name,
+             number:number,
+             email:email,
+             password:password
+           },
+           file: image
+         }
+       }
+       );
+      //  closeDrawer();
+     } catch (error) {
+       console.log(error)
+     }
   };
 
   return (
     <>
       <DrawerTitleWrapper>
-        <DrawerTitle>Add Staff Member</DrawerTitle>
+        <DrawerTitle>Añadir Usuario</DrawerTitle>
       </DrawerTitleWrapper>
+
 
       <Form onSubmit={handleSubmit(onSubmit)} style={{ height: '100%' }}>
         <Scrollbars
@@ -83,11 +121,35 @@ const StaffMemberForm: React.FC<Props> = (props) => {
         >
           <Row>
             <Col lg={4}>
-              <FieldDetails>
-                Add staff name, description and necessary information from here
-              </FieldDetails>
+              <FieldDetails>Sube la imagen del usuario aqui</FieldDetails>
             </Col>
-
+            <Col lg={8}>
+              <DrawerBox
+                overrides={{
+                  Block: {
+                    style: {
+                      width: '100%',
+                      height: 'auto',
+                      padding: '30px',
+                      borderRadius: '3px',
+                      backgroundColor: '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    },
+                  },
+                }}
+              >
+              <Uploader onChange={handleUploader} />
+              </DrawerBox>
+            </Col>
+            </Row>
+            <Row>
+                <Col lg={4}>
+                  <FieldDetails>
+                    Add staff name, description and necessary information from here
+                  </FieldDetails>
+                </Col>
             <Col lg={8}>
               <DrawerBox>
                 <FormFields>

@@ -25,6 +25,7 @@ const AuthProvider = (props: any) => {
   function signout(cb) {
     makeAuthenticated(false);
     localStorage.removeItem('pickbazar_token');
+    localStorage.removeItem('id')
     setTimeout(cb, 100);
   }
   return (

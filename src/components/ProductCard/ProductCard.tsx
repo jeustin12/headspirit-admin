@@ -204,10 +204,10 @@ const[createProduct]=useMutation(CREATE_PRODUCT)
                       style: () => ({
                         width: '40%',
                         height:'10%',
-                        borderTopLeftRadius: '13px',
-                        borderTopRightRadius: '13px',
-                        borderBottomLeftRadius: '13px',
-                        borderBottomRightRadius: '13px',
+                        borderTopLeftRadius: '3px',
+                        borderTopRightRadius: '3px',
+                        borderBottomLeftRadius: '3px',
+                        borderBottomRightRadius: '3px',
                         background:"#CBC0D3",
                         marginLeft:"10%"
                       }),

@@ -95,8 +95,8 @@ const AddProduct: React.FC<Props> = (props) => {
       unit: data.unit,
       price: Number(data.price),
       discountInPercent: Number(data.discountInPercent),
-      quantity: Number(data.quantity).toFixed(2),
-      salePrice: Number(data.salePrice).toFixed(2),
+      quantity: Number(data.quantity),
+      salePrice: Number(data.salePrice),
       // creation_date: new Date(),
       slug: data.name,
       description: data.description,
@@ -111,7 +111,6 @@ const AddProduct: React.FC<Props> = (props) => {
           file: data.image
         },
       });
-      // console.log(newProduct);
       
     } catch (error) {
       console.log(error)

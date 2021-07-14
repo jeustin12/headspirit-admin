@@ -34,7 +34,7 @@ export const StyledHeadCell = withStyle(BaseStyledHeadCell, () => ({
 export const StyledCell = withStyle(BaseStyledCell, () => ({
   fontFamily: "'Lato', sans-serif",
   fontWeight: 400,
-  color: '#161F6A !important',
+  color: '#161F6A ',
   alignSelf: 'center',
 }));
 

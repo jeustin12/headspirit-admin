@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { styled, withStyle, createThemedUseStyletron } from 'baseui';
+import { withStyle} from 'baseui';
 import dayjs from 'dayjs';
 import { Grid, Row as Rows, Col as Column } from 'components/FlexBox/FlexBox';
 import Select from 'components/Select/Select';
@@ -33,30 +33,10 @@ const GET_ORDERS = gql`
   }
 `;
 
-type CustomThemeT = { red400: string; textNormal: string; colors: any };
-const themedUseStyletron = createThemedUseStyletron<CustomThemeT>();
+// type CustomThemeT = { red400: string; textNormal: string; colors: any };
+// const themedUseStyletron = createThemedUseStyletron<CustomThemeT>();
 
-const Statuss = styled('div', ({ $theme }) => ({
-  ...$theme.typography.fontBold14,
-  color: $theme.colors.textDark,
-  display: 'flex',
-  alignItems: 'center',
-  lineHeight: '1',
-  textTransform: 'capitalize',
 
-  ':before': {
-    content: '""',
-    width: '10px',
-    height: '10px',
-    display: 'inline-block',
-    borderTopLeftRadius: '10px',
-    borderTopRightRadius: '10px',
-    borderBottomRightRadius: '10px',
-    borderBottomLeftRadius: '10px',
-    backgroundColor: $theme.borders.borderE6,
-    marginRight: '10px',
-  },
-}));
 
 const Col = withStyle(Column, () => ({
   '@media only screen and (max-width: 767px)': {
@@ -83,7 +63,7 @@ const statusSelectOptions = [
 
 
 export default function Orders() {
-  const [useCss, theme] = themedUseStyletron();
+  // const [useCss, theme] = themedUseStyletron();
   const dispatch = useDrawerDispatch();
   
   const passid =(id)=>{
@@ -92,30 +72,30 @@ export default function Orders() {
       drawerComponent: 'ORDER_UPDATE_FORM',
       data:id})
   }
-  const sent = useCss({
-    ':before': {
-      content: '""',
-      backgroundColor: theme.colors.primary,
-    },
-  });
-  const failed = useCss({
-    ':before': {
-      content: '""',
-      backgroundColor: theme.colors.red400,
-    },
-  });
-  const processing = useCss({
-    ':before': {
-      content: '""',
-      backgroundColor: theme.colors.textNormal,
-    },
-  });
-  const paid = useCss({
-    ':before': {
-      content: '""',
-      backgroundColor: theme.colors.blue400,
-    },
-  });
+  // const sent = useCss({
+  //   ':before': {
+  //     content: '""',
+  //     backgroundColor: theme.colors.primary,
+  //   },
+  // });
+  // const failed = useCss({
+  //   ':before': {
+  //     content: '""',
+  //     backgroundColor: "blue",
+  //   },
+  // });
+  // const processing = useCss({
+  //   ':before': {
+  //     content: '""',
+  //     backgroundColor: theme.colors.textNormal,
+  //   },
+  // });
+  // const paid = useCss({
+  //   ':before': {
+  //     content: '""',
+  //     backgroundColor: theme.colors.blue400,
+  //   },
+  // });
 
   const [status, setstatus] = useState('');
   const [statust, setstatust] = useState('');
@@ -198,7 +178,7 @@ export default function Orders() {
 
           <Wrapper style={{ boxShadow: '0 0 5px rgba(0, 0 , 0, 0.05)' }}>
             <TableWrapper>
-              <StyledTable $gridTemplateColumns=" minmax(170px, 100px) minmax(150px, auto) minmax(300px, 200px) minmax(300px, auto) minmax(100px, max-content) minmax(170px, auto) minmax(150px, auto) minmax(175px, auto) minmax(150px, auto) minmax(150px, auto)  ">
+              <StyledTable $gridTemplateColumns=" minmax(170px, 100px) minmax(150px, auto) minmax(300px, 200px) minmax(300px, auto) minmax(100px, max-content) minmax(170px, auto) minmax(150px, auto) minmax(185px, auto) minmax(150px, auto) minmax(150px, auto)  ">
                 <StyledHeadCell>Nombre del cliente</StyledHeadCell>
                 <StyledHeadCell>Fecha del Pedido</StyledHeadCell>
                 <StyledHeadCell>Direccion de envio</StyledHeadCell>
@@ -236,33 +216,29 @@ export default function Orders() {
                           style={ index % 2? { background : "grey" }:{ background : "white" }}
                           >{row[7]}</StyledCell>
                           <StyledCell
-                          style={ index % 2? { background : "grey" }:{ background : "white" }}
+                          style={{
+                            'backgroundColor': index % 2 ? 'grey' : 'white',
+                            'color': row[8]==='Envio Express' ? 'red' : '#161F6A'
+                        }}
                           >{row[8]}</StyledCell>
                           <StyledCell 
                            style={ index % 2? { background : "grey" }:{ background : "white" }}
                           >
-                          
-                            <Statuss
-                            
-                              className={
-                                
-                                row[9] === '3 - Enviado'
-                                ? sent
-                                : row[9] === '1 - Pago pendiente'
-                                ? paid
-                                : row[9] === '2 - Pago realizado'
-                                ? processing
-                                : row[9].toLowerCase() === '4 - Inconsistencias'
-                                ? failed
-                                : ''
-                              }
-                              >
-                              {row[9]}
-                            </Statuss>
+                            {row[9]}
                           </StyledCell>
-                        <StyledCell
-                         style={ index % 2? { background : "grey" }:{ background : "white" }}
-                        >{row[10]}</StyledCell>
+
+                          {(row[10]=== null ?
+                          <StyledCell>
+                            {row[10]}
+                          </StyledCell>
+                          :
+                          <StyledCell
+                          style={ index % 2? { background : "grey" }:{ background : "white" }}
+                          >
+                            {row[10]}
+                          </StyledCell>
+                          )}
+                          
                           <StyledCell>
                           <Button
                         onClick={()=>{passid(row[1])}}
@@ -278,7 +254,7 @@ export default function Orders() {
                           },
                         }}
                         >
-                          Edit
+                          Editar
                         </Button>
                           </StyledCell>
                         </React.Fragment>
