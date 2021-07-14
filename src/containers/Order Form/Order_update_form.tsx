@@ -19,6 +19,7 @@ FieldDetails,
 ButtonGroup,
 } from '../DrawerItems/DrawerItems.style';
 import { FormFields, FormLabel } from 'components/FormFields/FormFields';
+import Swal from 'sweetalert2';
 
 const GET_ORDER_ID = gql`
 query	GetOneOrder($id:String!){
@@ -51,7 +52,7 @@ const options = [
     { value: 'pending', label: '1 - Pendiente de Pago' },
     { value: 'processing', label: '2 - Pago realizado' },
     { value: 'delivered', label: '3 - Enviado' },
-    { value: 'failed', label: '4 - Problema' },
+    { value: 'failed', label: '4 - Inconsistencias' },
 ];
 
 
@@ -113,103 +114,67 @@ function getLinkWhastapp(number, message) {
 
 const onSubmit = async valores => {
     const {message,guide_number}= valores
-    console.log(valores);
+    
     let ship_message = message + guide_number
-    if (guide_number === "" ) {
-        // if (valores.parent === undefined) {
-        //     try {
-        //     await updateOrder({
-        //         variables:{
-        //         id:id,
-        //         input:{
-        //             Status:stat
-        //         },
-        //         }
-        //     });
-        //     switch (stat) {
-        //         case '2 - Pago realizado':
-        //             getLinkWhastapp(myNumber,message)
-        //             break;
-        //         case '4 - Problema':
-        //             getLinkWhastapp(myNumber,message)
-        //             break;
-        //         case '3 - Enviado':
-        //                 getLinkWhastapp(myNumber,ship_message);
-        //                 updateCustumer({
-        //                     variables:{
-        //                         id: data.FindOneOrder.custumerId,
-        //                         order: Number(data.FindOneOrder.Total_amount)
-        //                     }
-        //                 })
-        //             break;
-        //     }
-        //     closeDrawer();
-        //     } catch (error) {
-        //     console.log(error)
-        //     }
-        // } else {
-            try {
-                await updateOrder({
-                    variables:{
-                    id:id,
-                    input:{
-                    Status:status
-                    },
-                    }
-                });
-                
-                switch (status) {
-                    case '2 - Pago realizado':
-                        getLinkWhastapp(myNumber,message)
-                        break;
-                    case '4 - Problema':
-                        getLinkWhastapp(myNumber,message)
-                        break;
-                    case '3 - Enviado':
-                            getLinkWhastapp(myNumber,ship_message);
-                            updateCustumer({
-                                variables:{
-                                    id: data.FindOneOrder.custumerId,
-                                    order: Number(data.FindOneOrder.Total_amount)
-                                }
-                            })
-                    break;
-                }
-                closeDrawer();
-                } catch (error) {
-                console.log(error)
-                }
-        // }
-    } else {
-            try {
-                await updateOrder({
-                    variables:{
-                    id:id,
-                    input:{
-                        Status:status,
-                        guide_number:guide_number
-                    },
-                    }
-                });
-                switch (status) {
-                    case '3 - Enviado':
-                        getLinkWhastapp(myNumber,ship_message);
-                        updateCustumer({
-                            variables:{
-                                id: data.FindOneOrder.custumerId,
-                                order: Number(data.FindOneOrder.Total_amount)
-                            }
-                        })
-                        break;
-                }
-                
-                closeDrawer();
-                } catch (error) {
-                console.log(error)
-                }
-        
+    if (valores.parent === undefined) {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: "Por favor selecciona un estado",
+            showConfirmButton: true,
+          })
+    } else if (valores.parent[0].label=== '1 - Pendiente de Pago') {
+        await updateOrder({
+            variables:{
+            id:id,
+            input:{
+                Status:valores.parent[0].label
+            },
+            }
+        }); 
+    } else if(valores.parent[0].label === '2 - Pago realizado' && message.length > 0){
+        await updateOrder({
+            variables:{
+                id:id,
+                input:{
+                    Status:valores.parent[0].label
+                },
+            }
+        });
+        getLinkWhastapp(myNumber,message)
+    }else if(valores.parent[0].label === '3 - Enviado' && message.length > 0 && guide_number > 0){
+        await updateOrder({
+            variables:{
+                id:id,
+                input:{
+                    Status:valores.parent[0].label
+                },
+            }
+        });
+        getLinkWhastapp(myNumber,message)
+    }else if(valores.parent[0].label === '4 - Inconsistencias' && message.length > 0){
+        await updateOrder({
+            variables:{
+                id:id,
+                input:{
+                    Status:valores.parent[0].label
+                },
+            }
+        });
+        getLinkWhastapp(myNumber,message)
     }
-};
+    else{
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: "Por favor asegurese de ingresar ya sea el mensaje o el numero de guia",
+            showConfirmButton: true,
+          })
+    }
+    return console.log(valores)
+    
+}
+
 
 const set = () => {
 setTimeout(()=>{
@@ -318,6 +283,18 @@ return (
                 }}
             />
             </FormFields>
+            {(status === '1 - Pendiente de Pago') ?
+            <FormFields>
+            <FormLabel>Mensaje</FormLabel>
+            <Input
+                inputRef={register({maxLength: 1000 })}
+                name="message"
+                value={message}
+                onChange={handleMessageChange}
+            />
+            </FormFields>
+            : ''
+            }
             {(status === '2 - Pago realizado') ?
             <FormFields>
             <FormLabel>Mensaje</FormLabel>
@@ -330,7 +307,7 @@ return (
             </FormFields>
             : ''
             }
-            {(status === '4 - Problema') ?
+            {(status === '4 - Inconsistencias') ?
             <FormFields>
             <FormLabel>Mensaje del problema</FormLabel>
             <Input
