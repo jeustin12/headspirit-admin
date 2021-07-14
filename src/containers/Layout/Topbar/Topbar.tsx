@@ -72,24 +72,133 @@ const Topbar = ({ refs }: any) => {
   );
   if (userImage.loading) {
     return(
-      <div
-    style={{
-      width: "50px",
-      height: "50px",
-      /* Center vertically and horizontally */
-      position: "absolute",
-      top: "50%",
-      left: "25%",
-      margin: "-25px 0 0 -25px"
-    }}>
-      <h1
-      style={{
-        color:"#CBC0D3"
-      }}
-      >Cargando</h1>
-    </div>
-    )
-  }
+      <TopbarWrapper ref={refs}>
+      <Logo>
+        <Link to="/">
+          <LogoImage src={Logoimage} alt="pickbazar-admin" />
+        </Link>
+      </Logo>
+
+      <DrawerWrapper>
+        <DrawerIcon onClick={() => setIsDrawerOpen(true)}>
+          <MenuIcon />
+        </DrawerIcon>
+        <Drawer
+          isOpen={isDrawerOpen}
+          anchor={ANCHOR.left}
+          onClose={() => setIsDrawerOpen(false)}
+          overrides={{
+            Root: {
+              style: {
+                zIndex: '1',
+              },
+            },
+            DrawerBody: {
+              style: {
+                marginRight: '0',
+                marginLeft: '0',
+                '@media only screen and (max-width: 767px)': {
+                  marginLeft: '30px',
+                },
+              },
+            },
+            DrawerContainer: {
+              style: {
+                width: '270px',
+                '@media only screen and (max-width: 767px)': {
+                  width: '80%',
+                },
+              },
+            },
+            Close: {
+              component: () => (
+                <CloseButton onClick={() => setIsDrawerOpen(false)}>
+                  <ArrowLeftRound />
+                </CloseButton>
+              ),
+            },
+          }}
+        >
+          <Sidebar onMenuItemClick={() => setIsDrawerOpen(false)} />
+        </Drawer>
+      </DrawerWrapper>
+
+      <TopbarRightSide>
+        <Button onClick={openDrawer}>Add Products</Button>
+
+        <Popover
+          content={({ close }) => <Notification data={data} onClear={close} />}
+          accessibilityType={'tooltip'}
+          placement={PLACEMENT.bottomRight}
+          overrides={{
+            Body: {
+              style: {
+                width: '330px',
+                zIndex: 2,
+              },
+            },
+            Inner: {
+              style: {
+                backgroundColor: '#ffffff',
+              },
+            },
+          }}
+        >
+          <NotificationIconWrapper>
+            <NotificationIcon />
+            <AlertDot>
+              <AlertDotIcon />
+            </AlertDot>
+          </NotificationIconWrapper>
+        </Popover>
+
+        <Popover
+          content={({ close }) => (
+            <UserDropdowItem>
+              <NavLink to={STAFF_MEMBERS} exact={false} onClick={close}>
+                Staff
+              </NavLink>
+              <NavLink to={SETTINGS} exact={false} onClick={close}>
+                Settings
+              </NavLink>
+              <LogoutBtn
+                onClick={() => {
+                  signout();
+                  close();
+                }}
+              >
+                Logout
+              </LogoutBtn>
+            </UserDropdowItem>
+          )}
+          accessibilityType={'tooltip'}
+          placement={PLACEMENT.bottomRight}
+          overrides={{
+            Body: {
+              style: () => ({
+                width: '220px',
+                zIndex: 2,
+              }),
+            },
+            Inner: {
+              style: {
+                backgroundColor: '#ffffff',
+              },
+            },
+          }}
+        >
+          <ProfileImg>
+            {/* {(userImage.data.findOneImage.image===null ? 
+            ''
+            :
+            <Image src={userImage.data.findOneImage.image} alt="user" />
+            )} */}
+          </ProfileImg>
+        </Popover>
+      </TopbarRightSide>
+    </TopbarWrapper>
+      )
+  } 
   return (
     <TopbarWrapper ref={refs}>
       <Logo>
@@ -207,11 +316,11 @@ const Topbar = ({ refs }: any) => {
           }}
         >
           <ProfileImg>
-            {(userImage.data.findOneImage.image===null ? 
+           {(userImage.data.findOneImage.image===null ? 
             ''
             :
             <Image src={userImage.data.findOneImage.image} alt="user" />
-            )}
+            )} 
           </ProfileImg>
         </Popover>
       </TopbarRightSide>
