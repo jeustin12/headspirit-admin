@@ -2,11 +2,8 @@ import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'components/Button/Button';
 import Popover, { PLACEMENT } from 'components/Popover/Popover';
-import Notification from 'components/Notification/Notification';
 import { AuthContext } from 'context/auth';
 import { STAFF_MEMBERS, SETTINGS } from 'settings/constants';
-import { NotificationIcon } from 'assets/icons/NotificationIcon';
-import { AlertDotIcon } from 'assets/icons/AlertDotIcon';
 import { ArrowLeftRound } from 'assets/icons/ArrowLeftRound';
 import { MenuIcon } from 'assets/icons/MenuIcon';
 import {  gql, useQuery } from '@apollo/client';
@@ -17,8 +14,6 @@ import {
   TopbarRightSide,
   ProfileImg,
   Image,
-  AlertDot,
-  NotificationIconWrapper,
   UserDropdowItem,
   NavLink,
   LogoutBtn,
@@ -65,6 +60,7 @@ const Topbar = ({ refs }: any) => {
       user: prueba
     }
   }) 
+  console.log(data);
   const dispatch = useDrawerDispatch();
   const { signout } = React.useContext(AuthContext);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -139,8 +135,11 @@ const Topbar = ({ refs }: any) => {
       </DrawerWrapper>
 
       <TopbarRightSide>
-        <Button onClick={openDrawer}>Add Products</Button>
-
+        <Button onClick={openDrawer}
+        style={{
+          marginRight: '25px',
+        }} 
+        >Añadir Productos</Button>
 
 
         <Popover
