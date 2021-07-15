@@ -161,7 +161,7 @@ export default function Orders() {
                     options={statusSelectOptions}
                     labelKey="label"
                     valueKey="value"
-                    placeholder="Status"
+                    placeholder="Estado"
                     value={statust}
                     searchable={false}
                     onChange={handleStatus}
