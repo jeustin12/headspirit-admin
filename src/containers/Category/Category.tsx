@@ -203,7 +203,7 @@ return (
         </Header>
         <Wrapper style={{ boxShadow: '0 0 5px rgba(0, 0 , 0, 0.05)' }}>
           <TableWrapper>
-            <StyledTable $gridTemplateColumns=" minmax(100px, 100px) minmax(150px, 150px) minmax(150px, 150px) minmax(70px, 100px) minmax(60px, auto) minmax(60px, auto)">
+            <StyledTable $gridTemplateColumns=" minmax(100px, 10%) minmax(150px, 20%) minmax(150px, 20%) minmax(70px, 20%) minmax(60px, 275px) minmax(60px, 275px)">
               <StyledHeadCell>Imagen</StyledHeadCell>
               <StyledHeadCell>Nombre</StyledHeadCell>
               <StyledHeadCell>Palabra Clave</StyledHeadCell>

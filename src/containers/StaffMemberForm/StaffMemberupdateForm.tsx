@@ -16,16 +16,22 @@ import {
   ButtonGroup,
 } from '../DrawerItems/DrawerItems.style';
 import { FormFields, FormLabel } from 'components/FormFields/FormFields';
+import Uploader from 'components/Uploader/Uploader';
 const GET_USER_ID =gql`
 query OneUsert($id: String!){
   fetoneuser(id:$id){
     name
     number
     email
+    image
   }
 }
 `
-
+const UDDATE_STAFF_IMAGE = gql`
+mutation createStaff($input: UpdateProjectInput!,$file:Upload!,$id:String!) {
+  updateUserImage(project:$input,file:$file,id:$id) 
+  }
+`;
 
 const UPDATE_STAFF = gql`
 mutation updateUSer($id: String!, $input: UpdateProjectInput!){
@@ -48,15 +54,21 @@ const StaffMemberForm: React.FC<Props> = (props) => {
   const [number,setNumber]= React.useState('');
   const [email,setEmail]= React.useState('');
   const [setc, setsetc]= React.useState(true);
+  const [image,setImage]= React.useState('no')
 
   const {data,loading}=useQuery(GET_USER_ID,{
     variables:{id},
   })
   const [createStaff] = useMutation(UPDATE_STAFF);
+  const [updateImage] = useMutation(UDDATE_STAFF_IMAGE);
   if (loading) {
     return <h1>Cargando...</h1>
   }
 
+  const handleUploader = (files) => {
+    setImage(files[0]);
+    console.log(files)
+  };
   const handleNameChange = ({ value }) => {
     setName(value);
   };
@@ -66,26 +78,45 @@ const StaffMemberForm: React.FC<Props> = (props) => {
   };
 
   const handleEmailChange = ({ value }) => {
-    setNumber(value);
+    setEmail(value);
   };
 
   const onSubmit = async valores => {
     const {name,number,email} = valores
+    if (image==='no') {
+      try {
+         await createStaff({
+          variables: {
+            id:id,
+            input: {
+              name:name,
+              number:number,
+              email:email,
+            }
+          }
+        }
+        );
+        closeDrawer();
+      } catch (error) {
+        console.log(error)
+      }
+    }
     try {
-       await createStaff({
-        variables: {
+      await updateImage({
+        variables:{
           id:id,
-          input: {
+          input:{
             name:name,
             number:number,
             email:email,
-          }
+          },
+          file: image
         }
-      }
-      );
+      })
       closeDrawer();
+
     } catch (error) {
-      console.log(error)
+      
     }
   };
 
@@ -121,6 +152,33 @@ const StaffMemberForm: React.FC<Props> = (props) => {
             />
           )}
         >
+                    <Row>
+            <Col lg={4}>
+              <FieldDetails>Sube la imagen del usuario aqui</FieldDetails>
+            </Col>
+            <Col lg={8}>
+              <DrawerBox
+                overrides={{
+                  Block: {
+                    style: {
+                      width: '100%',
+                      height: 'auto',
+                      padding: '30px',
+                      borderRadius: '3px',
+                      backgroundColor: '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    },
+                  },
+                }}
+              >
+              <Uploader onChange={handleUploader} 
+              imageURL={data.fetoneuser.image}
+              />
+              </DrawerBox>
+            </Col>
+            </Row>
           <Row>
             <Col lg={4}>
               <FieldDetails>

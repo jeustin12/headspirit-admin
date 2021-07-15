@@ -130,7 +130,7 @@ export default function Customers() {
 
           <Wrapper style={{ boxShadow: '0 0 5px rgba(0, 0 , 0, 0.05)' }}>
             <TableWrapper>
-              <StyledTable $gridTemplateColumns="minmax(200px, 200px) minmax(200px, 200px) minmax(200px, 200px) minmax(150px, max-content) minmax(150px, 200px) minmax(200px, 200px)">
+              <StyledTable $gridTemplateColumns="minmax(250px, 200px) minmax(250px, 200px) minmax(250px, 200px) minmax(250px, max-content) minmax(225px, 200px) minmax(200px, 200px)">
                 <StyledHeadCell>ID</StyledHeadCell>
                 <StyledHeadCell>Nombre</StyledHeadCell>
                 <StyledHeadCell>Numero de telefono</StyledHeadCell>

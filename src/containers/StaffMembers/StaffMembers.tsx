@@ -171,7 +171,7 @@ export default function StaffMembers() {
 
           <Wrapper style={{ boxShadow: '0 0 5px rgba(0, 0 , 0, 0.05)' }}>
             <TableWrapper>
-              <StyledTable $gridTemplateColumns="minmax(70px, 70px) minmax(270px, max-content) minmax(270px, max-content) minmax(150px, max-content) minmax(200px, max-content) minmax(200px, max-content)">
+              <StyledTable $gridTemplateColumns="minmax(250px, 200px) minmax(250px, 200px) minmax(250px, 200px) minmax(250px, max-content) minmax(225px, 200px) minmax(200px, 200px)">
                 <StyledHeadCell>ID</StyledHeadCell>
                 <StyledHeadCell>Name</StyledHeadCell>
                 <StyledHeadCell>number</StyledHeadCell>
