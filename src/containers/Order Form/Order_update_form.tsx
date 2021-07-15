@@ -127,6 +127,7 @@ const onSubmit = async valores => {
             },
             }
         }); 
+        closeDrawer();
     } else if(valores.parent[0].label === '2 - Pago realizado' && message.length > 0){
         await updateOrder({
             variables:{
@@ -136,7 +137,8 @@ const onSubmit = async valores => {
                 },
             }
         });
-        getLinkWhastapp(myNumber,ship_message)
+        getLinkWhastapp(myNumber,message)
+        closeDrawer();
     }else if(valores.parent[0].label === '3 - Enviado' && message.length > 0 && guide_number > 0){
         await updateOrder({
             variables:{
@@ -146,7 +148,8 @@ const onSubmit = async valores => {
                 },
             }
         });
-        getLinkWhastapp(myNumber,message)
+        getLinkWhastapp(myNumber,ship_message)
+        closeDrawer();
     }else if(valores.parent[0].label === '4 - Inconsistencias' && message.length > 0){
         await updateOrder({
             variables:{
@@ -157,6 +160,7 @@ const onSubmit = async valores => {
             }
         });
         getLinkWhastapp(myNumber,message)
+        closeDrawer();
     }
     else{
         Swal.fire({
