@@ -79,7 +79,7 @@ const Topbar = ({ refs }: any) => {
   }}
   >Cargando...</h6>;
   
-  if (USERPROFILE.data.findOneImage.image === null || undefined) {
+  if (USERPROFILE.data === null || undefined) {
     signout();
   }
   let Profileimage = USERPROFILE.data.findOneImage.image
