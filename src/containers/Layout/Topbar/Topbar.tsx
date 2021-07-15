@@ -141,31 +141,7 @@ const Topbar = ({ refs }: any) => {
       <TopbarRightSide>
         <Button onClick={openDrawer}>Add Products</Button>
 
-        <Popover
-          content={({ close }) => <Notification data={data} onClear={close} />}
-          accessibilityType={'tooltip'}
-          placement={PLACEMENT.bottomRight}
-          overrides={{
-            Body: {
-              style: {
-                width: '330px',
-                zIndex: 2,
-              },
-            },
-            Inner: {
-              style: {
-                backgroundColor: '#ffffff',
-              },
-            },
-          }}
-        >
-          <NotificationIconWrapper>
-            <NotificationIcon />
-            <AlertDot>
-              <AlertDotIcon />
-            </AlertDot>
-          </NotificationIconWrapper>
-        </Popover>
+
 
         <Popover
           content={({ close }) => (
