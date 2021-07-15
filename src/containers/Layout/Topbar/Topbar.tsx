@@ -83,6 +83,9 @@ const Topbar = ({ refs }: any) => {
   if (USERPROFILE.data === null || undefined) {
     signout();
   }
+  if (localStorage.getItem('pickbazar_token') === null || undefined ) {
+    signout();
+  }
   return (
     <TopbarWrapper ref={refs}>
       <Logo>
