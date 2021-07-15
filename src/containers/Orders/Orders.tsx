@@ -100,7 +100,7 @@ export default function Orders() {
   const [status, setstatus] = useState('');
   const [statust, setstatust] = useState('');
 
-  const { data, error, refetch } = useQuery(GET_ORDERS,
+  const { data, error, refetch ,loading} = useQuery(GET_ORDERS,
     
     {
       pollInterval: 3000,
@@ -126,7 +126,12 @@ export default function Orders() {
       refetch({ Status: '' });
     }
   }
-
+  if (loading) {
+    return <h1>Cargando</h1>
+  }
+  let orden = data.FindallOrders.slice().sort((a, b) => a.id - b.id);
+  // let Ship_type = orden.sort();
+  // console.log(Ship_type);
   
   
   // function handleSearch(event) {
@@ -190,8 +195,8 @@ export default function Orders() {
                 <StyledHeadCell>Numero de guia</StyledHeadCell>
                 <StyledHeadCell>Editar</StyledHeadCell>
                 {data ? (
-                  data.FindallOrders.length ? (
-                    data.FindallOrders
+                  orden.length ? (
+                    orden
                       .map((item) => Object.values(item))
                       .map((row, index) => (
                         <React.Fragment key={index}>
