@@ -80,7 +80,7 @@ const Topbar = ({ refs }: any) => {
   >Cargando...</h6>;
   
   let Profileimage = USERPROFILE.data.findOneImage.image
-  if (USERPROFILE.data === null || undefined) {
+  if (Profileimage === null || undefined) {
     signout();
   }
   if (localStorage.getItem('pickbazar_token') === null || undefined ) {
