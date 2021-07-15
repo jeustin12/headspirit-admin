@@ -72,6 +72,12 @@ const Topbar = ({ refs }: any) => {
     () => dispatch({ type: 'OPEN_DRAWER', drawerComponent: 'PRODUCT_FORM' }),
     [dispatch]
   );
+  if (localStorage.getItem('pickbazar_token') === null || undefined ) {
+    signout();
+  }
+  if (USERPROFILE.data === null || undefined) {
+    signout();
+  }
   if(USERPROFILE.loading) return <h6
   style={{
     width:"70%",
@@ -79,13 +85,7 @@ const Topbar = ({ refs }: any) => {
   }}
   >Cargando...</h6>;
   
-  if (USERPROFILE.data === null || undefined) {
-    signout();
-  }
   let Profileimage = USERPROFILE.data.findOneImage.image
-  if (localStorage.getItem('pickbazar_token') === null || undefined ) {
-    signout();
-  }
   return (
     <TopbarWrapper ref={refs}>
       <Logo>
