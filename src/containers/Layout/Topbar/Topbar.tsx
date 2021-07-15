@@ -16,7 +16,7 @@ import {
   LogoImage,
   TopbarRightSide,
   ProfileImg,
-  // Image,
+  Image,
   AlertDot,
   NotificationIconWrapper,
   UserDropdowItem,
@@ -27,6 +27,8 @@ import {
   DrawerWrapper,
 } from './Topbar.style';
 import Logoimage from 'assets/image/PickBazar.png';
+import GuestImage from 'assets/image/user.jpg';
+
 import { useDrawerDispatch } from 'context/DrawerContext';
 import Drawer, { ANCHOR } from 'components/Drawer/Drawer';
 import Sidebar from '../Sidebar/Sidebar';
@@ -44,25 +46,25 @@ const GET_CATEGORIES = gql`
     }
 }
 `;
-// const GET_USER_ID =gql`
-// query findOneImage($user: String!){
-//   findOneImage(user:$user){
-//     name
-//     number
-//     email
-//     image
-//   }
-// }
-// `
+const GET_USER_ID =gql`
+query findOneImage($user: String!){
+  findOneImage(user:$user){
+    name
+    number
+    email
+    image
+  }
+}
+`
 
 const Topbar = ({ refs }: any) => {
   const {data} = useQuery(GET_CATEGORIES);
-  // let id = localStorage.getItem('id');
-  // const userImage = useQuery(GET_USER_ID,{
-  //   variables:{
-  //     user: id
-  //   }
-  // }) 
+  let id = localStorage.getItem('id');
+  const USERPROFILE = useQuery(GET_USER_ID,{
+    variables:{
+      user: id
+    }
+  }) 
   const dispatch = useDrawerDispatch();
   const { signout } = React.useContext(AuthContext);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -70,6 +72,16 @@ const Topbar = ({ refs }: any) => {
     () => dispatch({ type: 'OPEN_DRAWER', drawerComponent: 'PRODUCT_FORM' }),
     [dispatch]
   );
+  if(USERPROFILE.loading) return <h6
+  style={{
+    width:"70%",
+    background:'red'
+  }}
+  >Cargando...</h6>;
+  
+  let Profileimage = USERPROFILE.data.findOneImage.image
+  console.log(Profileimage);
+   
   return (
     <TopbarWrapper ref={refs}>
       <Logo>
@@ -187,11 +199,11 @@ const Topbar = ({ refs }: any) => {
           }}
         >
           <ProfileImg>
-           {/* {(image === '' ? 
-            ''
+           {( Profileimage=== null ? 
+            <Image src={GuestImage} alt="user" />
             :
-            <Image src={image} alt="user" />
-            )}  */}
+            <Image src={Profileimage} alt="user" />
+            )} 
           </ProfileImg>
         </Popover>
       </TopbarRightSide>

@@ -42,12 +42,12 @@ export const TopbarWrapper = styled('div', () => ({
     padding: '20px 45px',
   },
 }));
-
+//edit this
 export const Logo = styled('div', () => ({
-  marginRight: 'auto',
+  marginLeft: 'auto',
   cursor: 'pointer',
 
-  '@media only screen and (max-width: 1199px)': {
+  '@media only screen and (max-width: 111111px)': {
     display: 'none',
   },
 }));
@@ -143,7 +143,7 @@ export const CloseButton = styled('button', ({ $theme }) => ({
 }));
 
 export const DrawerWrapper = styled('div', ({ $theme }) => ({
-  '@media only screen and (min-width: 1200px)': {
+  '@media only screen and (min-width: 10000px)': {
     display: 'none',
   },
 }));

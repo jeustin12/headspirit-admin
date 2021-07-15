@@ -21,7 +21,7 @@ const SidedbarDesktop = styled('div', () => ({
 const AdminLayout = ({ children }: any) => {
   let [topbarRef, { height }] = useComponentSize();
   let [sidebarRef, { width }] = useComponentSize();
-  const desktop = useMedia('(min-width: 992px)');
+  const desktop = useMedia('(min-width: 1982px)');
 
   return (
     <DrawerProvider>
