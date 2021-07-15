@@ -65,9 +65,9 @@ export default function Login() {
           password:password
         })
         authenticate({ username, password }, () => {
-          history.replace(from);
+          history.replace(from);          
         });
-        localStorage.setItem('id',username)
+        // localStorage.setItem('id',username)
         
     } catch (error) {
       console.log(error);

@@ -59,10 +59,11 @@ query findOneImage($user: String!){
 
 const Topbar = ({ refs }: any) => {
   const {data} = useQuery(GET_CATEGORIES);
+  let prueba = localStorage.getItem('pickbazar_token');
   let id = localStorage.getItem('id');
   const USERPROFILE = useQuery(GET_USER_ID,{
     variables:{
-      user: id
+      user: prueba
     }
   }) 
   const dispatch = useDrawerDispatch();
@@ -75,13 +76,11 @@ const Topbar = ({ refs }: any) => {
   if(USERPROFILE.loading) return <h6
   style={{
     width:"70%",
-    background:'red'
+    background:'white'
   }}
   >Cargando...</h6>;
   
   let Profileimage = USERPROFILE.data.findOneImage.image
-  console.log(Profileimage);
-   
   return (
     <TopbarWrapper ref={refs}>
       <Logo>
