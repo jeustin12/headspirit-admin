@@ -60,7 +60,6 @@ query findOneImage($user: String!){
 const Topbar = ({ refs }: any) => {
   const {data} = useQuery(GET_CATEGORIES);
   let prueba = localStorage.getItem('pickbazar_token');
-  let id = localStorage.getItem('id');
   const USERPROFILE = useQuery(GET_USER_ID,{
     variables:{
       user: prueba
