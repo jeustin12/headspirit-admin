@@ -78,24 +78,25 @@ const StaffMemberForm: React.FC<Props> = (props) => {
       } catch (error) {
         console.log(error)
       }
-    }
-    try {
-      await createStaffImage({
-         variables: {
-           input: {
-             name:name,
-             number:number,
-             email:email,
-             password:password
-           },
-           file: image
+    } else{
+      try {
+        await createStaffImage({
+           variables: {
+             input: {
+               name:name,
+               number:number,
+               email:email,
+               password:password
+             },
+             file: image
+           }
          }
+         );
+         closeDrawer();
+       } catch (error) {
+         console.log(error)
        }
-       );
-      //  closeDrawer();
-     } catch (error) {
-       console.log(error)
-     }
+    }
   };
 
   return (

@@ -70,7 +70,9 @@ export default function StaffMembers() {
       data: id})
     }
 
-  const { data, error,loading } = useQuery(GET_STAFFS);
+  const { data, error,loading } = useQuery(GET_STAFFS,{
+    pollInterval: 5000
+  });
   const [deletestaff]= useMutation(DELETE_USER)
   if (error) {
     return <div>Error! {error.message}</div>;
