@@ -78,6 +78,7 @@ const { register, handleSubmit,setValue} = useForm();
 React.useEffect(() => {
 register({ name: 'parent' });
 register({ name: 'image' });
+register({ name: 'message' });
 }, [register]);
 
 const[updateOrder]= useMutation(UPDATE_ORDER)
@@ -89,7 +90,7 @@ setGuide_number(value);
 };
 
 const handleMessageChange = ({ value }) => {
-    // setValue('parent', value);
+    setValue('parent', value);
     setMessage(value);
     };
 
@@ -97,6 +98,7 @@ const handleChange = ({ value }) => {
     setValue('parent', value);
     setStatust(value);
     setStatus(value[0].label);
+    SetStat(value[0].label)
     // console.log(value[0].label)
 }
 let myNumber=data.FindOneOrder.contact.replace(/ /g,'')
@@ -127,12 +129,12 @@ const onSubmit = async valores => {
             },
             }
         }); 
-        if (message.length > 0) {
+        if (message !== '') {
             getLinkWhastapp(myNumber,message)
         }
         closeDrawer();
         
-    } else if(stat === '2 - Pago realizado' && message.length > 0){
+    } else if(stat === '2 - Pago realizado' && message !== ''){
         await updateOrder({
             variables:{
                 id:id,
@@ -143,7 +145,7 @@ const onSubmit = async valores => {
         });
         getLinkWhastapp(myNumber,message)
         closeDrawer();        
-    }else if(stat === '3 - Enviado' && message.length > 0 && guide_number > 0){
+    }else if(stat === '3 - Enviado' && message !== '' && guide_number !== ''){
         await updateOrder({
             variables:{
                 id:id,
@@ -154,7 +156,7 @@ const onSubmit = async valores => {
         });
         getLinkWhastapp(myNumber,ship_message)
         closeDrawer();
-    }else if(stat === '4 - Inconsistencias' && message.length > 0){
+    }else if(stat === '4 - Inconsistencias' && message !== ''){
         await updateOrder({
             variables:{
                 id:id,
@@ -174,7 +176,7 @@ const onSubmit = async valores => {
             showConfirmButton: true,
           })
     }
-    return console.log('')
+    return console.log('heh')
     
 }
 
