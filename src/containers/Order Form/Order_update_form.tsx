@@ -111,51 +111,55 @@ const onSubmit = async valores => {
     const {message,guide_number}= valores
     
     let ship_message = message + guide_number
-    if (valores.parent === undefined) {
+    if (stat === undefined) {
         Swal.fire({
             position: 'center',
             icon: 'error',
             title: "Por favor selecciona un estado",
             showConfirmButton: true,
           })
-    } else if (valores.parent[0].label=== '1 - Pendiente de Pago') {
+    } else if (stat === '1 - Pendiente de Pago') {
         await updateOrder({
             variables:{
             id:id,
             input:{
-                Status:valores.parent[0].label
+                Status:stat
             },
             }
         }); 
+        if (message.length > 0) {
+            getLinkWhastapp(myNumber,message)
+        }
         closeDrawer();
-    } else if(valores.parent[0].label === '2 - Pago realizado' && message.length > 0){
+        
+    } else if(stat === '2 - Pago realizado' && message.length > 0){
         await updateOrder({
             variables:{
                 id:id,
                 input:{
-                    Status:valores.parent[0].label
+                    Status:stat
                 },
             }
         });
         getLinkWhastapp(myNumber,message)
-        closeDrawer();
-    }else if(valores.parent[0].label === '3 - Enviado' && message.length > 0 && guide_number > 0){
+        closeDrawer();        
+    }else if(stat === '3 - Enviado' && message.length > 0 && guide_number > 0){
         await updateOrder({
             variables:{
                 id:id,
                 input:{
-                    Status:valores.parent[0].label
+                    Status:stat
                 },
             }
         });
         getLinkWhastapp(myNumber,ship_message)
         closeDrawer();
-    }else if(valores.parent[0].label === '4 - Inconsistencias' && message.length > 0){
+    }else if(stat === '4 - Inconsistencias' && message.length > 0){
         await updateOrder({
             variables:{
                 id:id,
                 input:{
-                    Status:valores.parent[0].label
+                    Status:stat
                 },
             }
         });
@@ -170,7 +174,7 @@ const onSubmit = async valores => {
             showConfirmButton: true,
           })
     }
-    return console.log(valores)
+    return console.log('')
     
 }
 
@@ -183,6 +187,7 @@ setTimeout(()=>{
 },100)
 };
 if (setc === true) set()
+
 return (
 <>
 <DrawerTitleWrapper>
