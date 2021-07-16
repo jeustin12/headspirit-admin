@@ -28,6 +28,7 @@ query getCustomers{
       total_order
       total_orders
       creation_date
+      cellphone
     }
   }
 `;
@@ -82,7 +83,7 @@ export default function Customers() {
     setSearch(value);
     refetch({ searchBy: value });
   }
-  let customer = data.customers
+  let customer = data.customers.filter(ele=>ele.name!== 'prueba')
   
   if (error) {
     return <div>Error! {error.message}</div>;
@@ -146,7 +147,7 @@ export default function Customers() {
                         <React.Fragment key={index}>
                           <StyledBodyCell>{row[1]}</StyledBodyCell>
                           <StyledBodyCell>{row[2]}</StyledBodyCell>
-                          <StyledBodyCell>{( row[3]=== undefined ) ? '': `${row[3].map(contact=>contact.number)}`}</StyledBodyCell>
+                          <StyledBodyCell>{row[7]}</StyledBodyCell>
                           <StyledBodyCell>₡{row[4]}</StyledBodyCell>
                           <StyledBodyCell>{row[5]}</StyledBodyCell>
                           <StyledBodyCell>

@@ -130,9 +130,9 @@ export default function Orders() {
     return <h1>Cargando</h1>
   }
   let orden = data.FindallOrders.slice().sort((a, b) => a.id - b.id);
-  // let Ship_type = orden.sort();
-  // console.log(Ship_type);
-  
+  let Express_Ship = orden.filter(ele=>ele.schedule === 'Envio Express')
+  let Normal_Ship = orden.filter(ele=>ele.schedule === 'Entega normal')
+  let ordenes = Express_Ship.concat(Normal_Ship)
   
   // function handleSearch(event) {
   //   const { value } = event.currentTarget;
@@ -195,8 +195,8 @@ export default function Orders() {
                 <StyledHeadCell>Numero de guia</StyledHeadCell>
                 <StyledHeadCell>Editar</StyledHeadCell>
                 {data ? (
-                  orden.length ? (
-                    orden
+                  ordenes.length ? (
+                    ordenes
                       .map((item) => Object.values(item))
                       .map((row, index) => (
                         <React.Fragment key={index}>
