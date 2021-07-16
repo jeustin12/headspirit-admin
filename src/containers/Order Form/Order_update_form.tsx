@@ -150,7 +150,8 @@ const onSubmit = async valores => {
             variables:{
                 id:id,
                 input:{
-                    Status:stat
+                    Status:stat,
+                    guide_number:guide_number
                 },
             }
         });
@@ -161,7 +162,7 @@ const onSubmit = async valores => {
             variables:{
                 id:id,
                 input:{
-                    Status:stat
+                    Status:stat,
                 },
             }
         });

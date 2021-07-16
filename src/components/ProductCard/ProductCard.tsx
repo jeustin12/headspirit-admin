@@ -153,7 +153,10 @@ const[createProduct]=useMutation(CREATE_PRODUCT)
               </DiscountedPrice>
             ) : null}
           </ProductPriceWrapper>
-          <h5>{quantity}</h5>
+          <h5
+          style={{
+            color:"#CBC0D3"
+          }}>Invertario:{quantity}</h5>
           <OrderID>{orderId}</OrderID>
         </ProductMeta>
       </ProductInfo>
