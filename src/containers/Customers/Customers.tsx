@@ -82,7 +82,7 @@ export default function Customers() {
     setSearch(value);
     refetch({ searchBy: value });
   }
-  let customer = data.customers.filter(ele=>ele.name!== 'prueba')
+  let customer = data.customers
   
   if (error) {
     return <div>Error! {error.message}</div>;
