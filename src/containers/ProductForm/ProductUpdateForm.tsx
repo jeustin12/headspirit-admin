@@ -93,14 +93,15 @@ const AddProduct: React.FC<Props> = () => {
   };
 
   const onSubmit = (data2) => {
+    let percetage = (Number(data2.price) - (Number(data2.price)/100) * Number(data2.discountInPercent))
     const newProduct = {
       name: data2.name,
       type: "makeup",
       unit: data2.unit,
       price: Number(data2.price),
       discountInPercent: Number(data2.discountInPercent),
-      quantity: Number(data2.quantity).toFixed(2),
-      salePrice: Number(data2.salePrice).toFixed(2),
+      quantity: Number(data2.quantity),
+      salePrice: (Number(data2.discountInPercent) === 0 ? Number(data2.price) : percetage),
       slug: data2.name,
       description: data2.description,
       isActive:"active"
@@ -200,10 +201,7 @@ const AddProduct: React.FC<Props> = () => {
                   />
                 </FormFields>
 
-                <FormFields>
-                  <FormLabel>Precio de venta</FormLabel>
-                  <Input type="number" inputRef={register} name="salePrice" />
-                </FormFields>
+                
 
                 <FormFields>
                   <FormLabel>Porcentaje de descuento</FormLabel>

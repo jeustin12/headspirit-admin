@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { styled, withStyle } from 'baseui';
 import { Grid, Row as Rows, Col as Column } from 'components/FlexBox/FlexBox';
 import Input from 'components/Input/Input';
-import Select from 'components/Select/Select';
+// import Select from 'components/Select/Select';
 import { useQuery, gql } from '@apollo/client';
 import { Header, Heading } from 'components/Wrapper.style';
 import Fade from 'react-reveal/Fade';
@@ -59,8 +59,8 @@ export const LoaderItem = styled('div', () => ({
 }));
 
 const GET_PRODUCTS = gql`
-  query getProducts{
-    products{
+  query getProducts($name:String!){
+    products(name:$name){
       id
       name
       description
@@ -82,26 +82,24 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-const typeSelectOptions = [
-  { value: 'grocery', label: 'Grocery' },
-  { value: 'women-cloths', label: 'Women Cloths' },
-  { value: 'bags', label: 'Bags' },
-  { value: 'makeup', label: 'Makeup' },
-];
-const priceSelectOptions = [
-  { value: 'highestToLowest', label: 'Highest To Lowest' },
-  { value: 'lowestToHighest', label: 'Lowest To Highest' },
-];
+
+// const priceSelectOptions = [
+//   { value: 'highestToLowest', label: 'Highest To Lowest' },
+//   { value: 'lowestToHighest', label: 'Lowest To Highest' },
+// ];
 
 export default function Products() {
+  const [search, setSearch] = useState('');
   const { data, error,loading, refetch, } = useQuery(GET_PRODUCTS,
     {
       pollInterval: 3000,
+      variables:{
+        name:search
+      }
     }
     );
-  const [type, setType] = useState([]);
-  const [priceOrder, setPriceOrder] = useState([]);
-  const [search, setSearch] = useState([]);
+  // const [type, setType] = useState([]);
+  // const [priceOrder, setPriceOrder] = useState([]);
 
   if (error) {
     return <div>Error! {error.message}</div>;
@@ -132,34 +130,23 @@ export default function Products() {
   //     },
   //   });
   // }
-  function handlePriceSort({ value }) {
-    setPriceOrder(value);
-    if (value.length) {
-      refetch({
-        sortByPrice: value[0].value,
-      });
-    } else {
-      refetch({
-        sortByPrice: null,
-      });
-    }
-  }
-  function handleCategoryType({ value }) {
-    setType(value);
-    if (value.length) {
-      refetch({
-        type: value[0].value,
-      });
-    } else {
-      refetch({
-        type: null,
-      });
-    }
-  }
+  // function handlePriceSort({ value }) {
+  //   setPriceOrder(value);
+  //   if (value.length) {
+  //     refetch({
+  //       sortByPrice: value[0].value,
+  //     });
+  //   } else {
+  //     refetch({
+  //       sortByPrice: null,
+  //     });
+  //   }
+  // }
+
   function handleSearch(event) {
     const value = event.currentTarget.value;
     setSearch(value);
-    refetch({ searchText: value });
+    refetch({ name: value });
   }
 
   return (
@@ -173,19 +160,8 @@ export default function Products() {
 
             <Col md={10} xs={12}>
               <Row>
-                <Col md={3} xs={12}>
-                  <Select
-                    options={typeSelectOptions}
-                    labelKey="label"
-                    valueKey="value"
-                    placeholder="Category Type"
-                    value={type}
-                    searchable={false}
-                    onChange={handleCategoryType}
-                  />
-                </Col>
 
-                <Col md={3} xs={12}>
+                {/* <Col md={3} xs={12}>
                   <Select
                     options={priceSelectOptions}
                     labelKey="label"
@@ -195,7 +171,7 @@ export default function Products() {
                     searchable={false}
                     onChange={handlePriceSort}
                   />
-                </Col>
+                </Col> */}
 
                 <Col md={6} xs={12}>
                   <Input

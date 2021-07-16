@@ -88,6 +88,7 @@ const AddProduct: React.FC<Props> = (props) => {
     setValue('image', files[0]);
   };
   const onSubmit = (data) => {
+    let percetage = (Number(data.price) - (Number(data.price)/100) * Number(data.discountInPercent))
     const newProduct = {
       name: data.name,
       // image: data.image && data.image.length !== 0 ? data.image : '',
@@ -96,7 +97,7 @@ const AddProduct: React.FC<Props> = (props) => {
       price: Number(data.price),
       discountInPercent: Number(data.discountInPercent),
       quantity: Number(data.quantity),
-      salePrice: Number(data.salePrice),
+      salePrice: (Number(data.discountInPercent) === 0 ? Number(data.price) : percetage),
       // creation_date: new Date(),
       slug: data.name,
       description: data.description,
@@ -111,7 +112,6 @@ const AddProduct: React.FC<Props> = (props) => {
           file: data.image
         },
       });
-      
     } catch (error) {
       console.log(error)
     }
@@ -201,11 +201,6 @@ const AddProduct: React.FC<Props> = (props) => {
                     inputRef={register({ required: true })}
                     name="price"
                   />
-                </FormFields>
-
-                <FormFields>
-                  <FormLabel>Precio de venta</FormLabel>
-                  <Input type="number" inputRef={register} name="salePrice" />
                 </FormFields>
 
                 <FormFields>
