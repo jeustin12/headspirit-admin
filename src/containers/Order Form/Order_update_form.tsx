@@ -105,10 +105,17 @@ let myNumber=data.FindOneOrder.contact.replace(/ /g,'')
 
 function getLinkWhastapp(number, message) {
     message = message.split(' ').join('%20')
+    let ios = navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)
+    if (ios) {
+        alert('safari user')
+        
+    }
     return window.open('https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message)
 }
 
-
+console.log(
+    navigator.userAgent
+);
 const onSubmit = async valores => {
     const {message,guide_number}= valores
     
