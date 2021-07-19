@@ -101,7 +101,7 @@ const handleChange = ({ value }) => {
     SetStat(value[0].label)
     // console.log(value[0].label)
 }
-let myNumber=data.FindOneOrder.contact.replace(/ /g,'')
+
 
 function getLinkWhastapp(number, message) {
     message = message.split(' ').join('%20')
@@ -121,9 +121,7 @@ function getLinkWhastapp(number, message) {
     
 }
 
-console.log(
-    navigator.userAgent
-);
+
 const onSubmit = async valores => {
     const {message,guide_number}= valores
     
@@ -145,7 +143,8 @@ const onSubmit = async valores => {
             }
         }); 
         if (message !== '') {
-            getLinkWhastapp(myNumber,message)
+            getLinkWhastapp(data.FindOneOrder.contact,message)
+
         }
         closeDrawer();
         
@@ -158,7 +157,8 @@ const onSubmit = async valores => {
                 },
             }
         });
-        getLinkWhastapp(myNumber,message)
+        getLinkWhastapp(data.FindOneOrder.contact,message)
+        
         closeDrawer();        
     }else if(stat === '3 - Enviado' && message !== '' && guide_number !== ''){
         await updateOrder({
@@ -170,7 +170,8 @@ const onSubmit = async valores => {
                 },
             }
         });
-        getLinkWhastapp(myNumber,ship_message)
+        getLinkWhastapp(data.FindOneOrder.contact,ship_message)
+
         closeDrawer();
     }else if(stat === '4 - Inconsistencias' && message !== ''){
         await updateOrder({
@@ -181,7 +182,7 @@ const onSubmit = async valores => {
                 },
             }
         });
-        getLinkWhastapp(myNumber,message)
+        getLinkWhastapp(data.FindOneOrder.contact,message)
         closeDrawer();
     }
     else{

@@ -183,7 +183,7 @@ export default function Orders() {
 
           <Wrapper style={{ boxShadow: '0 0 5px rgba(0, 0 , 0, 0.05)' }}>
             <TableWrapper>
-              <StyledTable $gridTemplateColumns=" minmax(170px, 100px) minmax(150px, auto) minmax(300px, 200px) minmax(300px, auto) minmax(100px, max-content) minmax(170px, auto) minmax(150px, auto) minmax(185px, auto) minmax(150px, auto) minmax(150px, auto)  ">
+              <StyledTable $gridTemplateColumns=" minmax(170px, 100px) minmax(150px, auto) minmax(max-content, 100px) minmax(300px, auto) minmax(100px, max-content) minmax(170px, auto) minmax(150px, auto) minmax(185px, auto) minmax(150px, auto) minmax(150px, auto)  ">
                 <StyledHeadCell>Nombre del cliente</StyledHeadCell>
                 <StyledHeadCell>Fecha del Pedido</StyledHeadCell>
                 <StyledHeadCell>Direccion de envio</StyledHeadCell>
