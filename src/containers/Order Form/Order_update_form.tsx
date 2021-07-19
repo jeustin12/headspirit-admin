@@ -105,8 +105,25 @@ let myNumber=data.FindOneOrder.contact.replace(/ /g,'')
 
 function getLinkWhastapp(number, message) {
     message = message.split(' ').join('%20')
-    // return window.open('https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message)
-    return window.location.href = 'https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message
+    if ([
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+      ].includes(navigator.platform)
+      // iPad on iOS 13 detection
+      || (navigator.userAgent.includes("Mac") && "ontouchend" in document)) {
+        return Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: "Por favor asegurese de ingresar ya sea el mensaje o el numero de guia",
+            showConfirmButton: true,
+          })
+        //   return window.location.href = 'https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message
+    }
+    return window.open('https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message)
     
 }
 
