@@ -105,12 +105,10 @@ let myNumber=data.FindOneOrder.contact.replace(/ /g,'')
 
 function getLinkWhastapp(number, message) {
     message = message.split(' ').join('%20')
-    let ios = navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)
-    if (ios) {
-        alert('safari user')
-        
-    }
+    
+    window.open('https://github.com/pixijs/pixi.js', "_blank")
     return window.open('https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message)
+
 }
 
 console.log(
