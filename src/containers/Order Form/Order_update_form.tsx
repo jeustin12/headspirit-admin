@@ -106,7 +106,7 @@ let myNumber=data.FindOneOrder.contact.replace(/ /g,'')
 function getLinkWhastapp(number, message) {
     message = message.split(' ').join('%20')
     
-    return window.open('external:https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message, "_blank")
+    return window.open('https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message)
 
 }
 
