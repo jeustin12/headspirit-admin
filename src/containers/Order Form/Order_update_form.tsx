@@ -115,13 +115,7 @@ function getLinkWhastapp(number, message) {
       ].includes(navigator.platform)
       // iPad on iOS 13 detection
       || (navigator.userAgent.includes("Mac") && "ontouchend" in document)) {
-        return Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: "Por favor asegurese de ingresar ya sea el mensaje o el numero de guia",
-            showConfirmButton: true,
-          })
-        //   return window.location.href = 'https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message
+          return window.location.href = 'https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message
     }
     return window.open('https://api.whatsapp.com/send?phone=' + number + '&text=%20' + message)
     
