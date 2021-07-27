@@ -156,7 +156,7 @@ const[createProduct]=useMutation(CREATE_PRODUCT)
           <h5
           style={{
             color:"#CBC0D3"
-          }}>Invertario:{quantity}</h5>
+          }}>Inventario:{quantity}</h5>
           <OrderID>{orderId}</OrderID>
         </ProductMeta>
       </ProductInfo>
